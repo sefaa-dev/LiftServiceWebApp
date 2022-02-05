@@ -1,0 +1,140 @@
+/* #######################################################
+
+HOW TO CREATE AN INTERACTIVE GRAPH USING CSS3 & JQUERY [TUTORIAL]
+
+/* Resets */
+.graph-container,
+.graph-container div,
+.graph-container a,
+.graph-container span {
+	margin: 0;
+	padding: 0;
+}
+
+/* Gradinet and Rounded Corners */
+
+
+/*  Graph Container */
+.graph-container {
+	position: relative;
+	width: 350px;
+	height: 300px;
+}
+
+.graph-container > div {
+	position: absolute;
+	width: inherit;
+	height: inherit;
+	top: 0px;
+	left: 0px;
+}
+
+.graph-info {
+	width: 340px;
+}
+.ss_td_graph.ss_box_bg .graph-info a{
+	margin:10px 0px 0px;
+}
+/* Text Styles */
+#tooltip, .graph-info a {
+	height: 20px;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 20px;
+	color: #646464;
+}
+
+.tickLabel {
+	font-weight: bold;
+	font-size: 12px;
+	color: #666;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Tooltip */
+#tooltip {
+	position: absolute;
+	display: none;
+	padding: 5px 10px 20;
+	border: 1px solid #e1e1e1;
+}
+
+/* Links */
+.graph-info a {
+	position: relative;
+	display: inline-block;
+	float: left;
+	padding: 7px 7px 0px 30px;
+	margin-right: 10px;
+	text-decoration: none;
+	cursor: default;
+}
+
+/* Color Circle for Links */
+.graph-info a:before {
+	position: absolute;
+	display: block;
+	content: '';
+	width: 8px;
+	height: 8px;
+	top: 13px;
+	left: 13px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.graph-info .suppliers:before { background: #ad7cff; }
+.graph-info .seller:before { background: #56dcf0; }
+
+.graph-info a.seller {
+    color: #56dcf0!important;
+}
+/* Lines & Bars Buttons */
+#lines, #bars {
+	width: 34px;
+	height: 32px;
+	padding: 0;
+	margin-right: 0;
+	margin-left: 10px;
+	border-bottom: 2px solid #344a5f;
+	float: right;
+	cursor: pointer;
+	background: #344a5f;
+}
+
+#lines.active, #bars.active {
+	background: #82d344;
+	background: -moz-linear-gradient(top,  #82d344 0%, #71c73e 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#82d344), color-stop(100%,#71c73e));
+	background: -webkit-linear-gradient(top,  #82d344 0%,#71c73e 100%);
+	background: -o-linear-gradient(top,  #82d344 0%,#71c73e 100%);
+	background: -ms-linear-gradient(top,  #82d344 0%,#71c73e 100%);
+	background: linear-gradient(to bottom,  #82d344 0%,#71c73e 100%);
+}
+
+#lines span, #bars span {
+	display: block;
+	width: 34px;
+	height: 32px;
+}
+
+#lines.active span { 
+	background:#ad7cff;
+}
+#bars.active span { 
+	background:#56dcf0;
+}
+
+/* Hide the First and Last Y Label */
+.yAxis .tickLabel:first-child,
+.yAxis .tickLabel:last-child { display: none; }
+
+/* Clear Floats */
+.graph-info:before, .graph-info:after,
+.graph-container:before, .graph-container:after {
+	content: '';
+	display: block;
+	clear: both;
+}

@@ -1,0 +1,64 @@
+.ss_header .ss_menu li a:hover, .ss_subMenu li a:hover,.ss_product_content h2:hover,.ss_product_content span,.ss_section_seven .ss_seven ul li i,a:hover,.ss_eight h2 span a,.ss_foot_news_one .ss_btn:hover, .promo_code .ss_btn:hover,.ss_section_footer a:hover,.ss_copywrite p a,.ss_copywrite p a:hover {
+    color: #fc6c54;
+}
+.white_header .head_icon svg:hover,.ss_six_product a:hover, .ss_six_product a:hover svg,.social_share a:hover svg{
+	fill:#fc6c54;
+}
+.ss_btn:after, .white_btn:after,.ss_btn:hover, .ss_header .ss_menu li a.ss_btn:hover, .white_btn:hover,.ss_cart_list::-webkit-scrollbar-thumb, .table-responsive::-webkit-scrollbar-thumb,h3:before,.ss_foot_news_one .ss_btn, .promo_code .ss_btn,.ss_six_product li a, .social_share li a {
+    background: #fc6c54;
+}
+.ss_menu.ss_toggle ul::-webkit-scrollbar-thumb, .table-responsive::-webkit-scrollbar-thumb,.ss_product_content h2:before{
+	background-color: #ffa331;
+}
+.ss_btn {
+    border-color: #fc6c54;
+    color: #fc6c54;
+}
+.ss_cart_list a,.ss_cart_ico .ss_cart_total{
+	color:#222222;
+}
+.banner_three h1,h1, h2, h3, h4, h5, h6 {
+    color: #4a617e;
+}
+.ss_menuP:hover .ss_subMenu:after{
+	border-bottom-color:#4a617e;
+}
+.ss_subMenu {
+    background: #4a617e;
+}
+.ss_menu li .ss_subMenu li a{
+	color:#ffffff;
+}
+.ss_two_sec:after,.ss_seven_price,.ss_footer_news {
+    background: linear-gradient(-55deg , #ffa331, #fc6c54);
+}
+.ss_six_p_img.ss_box_bg:after{
+	background: linear-gradient(-55deg , rgba(255, 163, 49, 0.7), rgba(252, 108, 84, 0.7));
+}
+h3:after,.ss_four_left .ss_box_bg:hover {
+    border-color: #fc6c54;
+}
+.ss_section_footer,.ss_menu_bar span{
+	background:#222222;
+}
+.ss_copywrite {
+    background: #1b1b1b;
+}
+.ss_toggle .ss_menu_bar span{
+	background:#ffffff;
+}
+@media screen and (max-width: 1299px){
+.ss_menu > ul,.ss_menu.ss_toggle .ss_menu_bar:before {
+	background: #ffffff;
+}
+.ss_header .ss_menu li a, .ss_menu li,.ss_menu li.show_subMenu .ss_subMenu li a,.ss_menu.ss_toggle .ss_menu_bar:after {
+    color: #303040;
+}
+
+.ss_toggle .ss_menu_bar span{
+	background:#303040;
+}
+.ss_subMenu {
+    background: transparent;
+}
+}
