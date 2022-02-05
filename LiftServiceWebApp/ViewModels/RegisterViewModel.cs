@@ -8,6 +8,7 @@ namespace LiftServiceWebApp.ViewModels
 {
     public class RegisterViewModel
     {
+        [Display(Name = "Kullanıcı Adı")]
         [Required(ErrorMessage = "Kullanıcı adı alanı gereklidir")]
         public string UserName { get; set; }
         [Required(ErrorMessage = "Ad alanı gereklidir.")]
