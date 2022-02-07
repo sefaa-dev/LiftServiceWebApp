@@ -1,11 +1,10 @@
 ﻿@model LoginViewModel
-@{
-    ViewBag.Title = "Giriş";
-}
+
 @{ Layout = null;}
 
 <head>
 
+    <title>Giriş</title>
     <link rel="stylesheet" href="~/user-assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/user-assets/css/fonts.css" />
     <link rel="stylesheet" href="~/user-assets/css/fontawesome.min.css" />
@@ -22,6 +21,8 @@
     <section class="s_login">
         <div class="ss_box_bg">
             <a asp-controller="Home" asp-action="Index"> <img src="~/user-assets/images/svg/logo1.svg" class="img-fluid" alt="logo" /></a>
+            <div asp-validation-summary="All" class="text-danger"></div>
+
 
             <div class="s_heading">
                 <h2>Welcome to <span>Solar Supplier</span></h2>
@@ -56,7 +57,7 @@
             </form>
         </div>
     </section>
-
+  
     <script src="~/user-assets/js/jquery.min.js"></script>
     <script src="~/user-assets/js/bootstrap.min.js"></script>
     <script src="~/user-assets/js/jquery.magnific-popup.min.js"></script>

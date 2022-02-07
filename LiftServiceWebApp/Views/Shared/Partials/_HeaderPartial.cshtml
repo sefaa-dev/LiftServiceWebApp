@@ -4,12 +4,6 @@
 @inject SignInManager<ApplicationUser> signInManager
 @inject UserManager<ApplicationUser> userManager
 
-
-
-
-
-
-
 <section class="ss_index_one">
     <!--===== Section One Start =====-->
     <div class="container-fluid">
@@ -129,7 +123,7 @@
                             </div>
                             @if (signInManager.IsSignedIn(Context.User))
                             {
-                <a asp-controller="Account" asp-action="Logout">Çıkış Yap</a> @*var currentUser = userManager.FindByNameAsync(User.Identity.Name).Result;
+                <a asp-controller="Account" asp-action="Logout" class="white_btn">Çıkış Yap</a> @*var currentUser = userManager.FindByNameAsync(User.Identity.Name).Result;
 
                                     @if (userManager.IsInRoleAsync(currentUser, RoleNames.Admin).Result)
                                     {
