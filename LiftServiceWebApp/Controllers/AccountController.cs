@@ -1,14 +1,12 @@
 ﻿using LiftServiceWebApp.Models;
 using LiftServiceWebApp.Models.Identity;
-using LiftServiceWebApp.Service;
+using LiftServiceWebApp.Services;
 using LiftServiceWebApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -90,6 +88,19 @@ namespace LiftServiceWebApp.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
+                //TODO:kullanıcıya rol atama
+                var count = _userManager.Users.Count();
+                result = await _userManager.AddToRoleAsync(user, count == 1 ? RoleNames.Admin : RoleNames.Passive);
+                //if (count == 1) //admin
+                //{
+                //    result = await _userManager.AddToRoleAsync(user, RoleNames.Admin);
+                //}
+                //else //user
+                //{
+                //    result = await _userManager.AddToRoleAsync(user, RoleNames.User);
+                //}
+
+                //kullanıcıya email doğrulama gönderme
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                 var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
@@ -99,25 +110,20 @@ namespace LiftServiceWebApp.Controllers
                 {
                     Contacts = new string[] { user.Email },
                     Body =
-                        $"Lütfen Email'inizi doğrulayınız. -> <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Buraya Tıklayınız</a>.",
-                    Subject = "Hesap Doğrulama"
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.",
+                    Subject = "Confirm your email"
                 };
 
                 await _emailSender.SendAsync(emailMessage);
-                var count = _userManager.Users.Count();
-
-                result = await _userManager.AddToRoleAsync(user, count == 1 ? RoleNames.Admin : RoleNames.Passive);
-
-                //TODO:giriş sayfasına yönlendirme
             }
             else
             {
                 ModelState.AddModelError(string.Empty, "Kayıt işleminde bir hata oluştu");
                 return View(model);
             }
-
             return View();
         }
+
 
         [HttpGet]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
@@ -129,11 +135,11 @@ namespace LiftServiceWebApp.Controllers
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
-                return NotFound($"Bu ID: '{userId}' bulunamadı.");
+                return NotFound($"Unable to load user with ID '{userId}'.");
             }
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             var result = await _userManager.ConfirmEmailAsync(user, code);
-            ViewBag.StatusMessage = result.Succeeded ? "Email onaylama başarıyla gerçekleşti." : "Email doğrulama esnasında bir hata oluştu.";
+            ViewBag.StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
             return View();
         }
 
@@ -142,7 +148,6 @@ namespace LiftServiceWebApp.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -151,18 +156,17 @@ namespace LiftServiceWebApp.Controllers
                 return View(model);
             }
 
-            var result =
-                await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, true);
+            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, true);
 
             if (result.Succeeded)
             {
-            await _emailSender.SendAsync(new EmailMessage()
-            {
-                Contacts = new string[] { "abc@ww.com" },
-                Body = $"{HttpContext.User.Identity.Name} Sisteme giriş yaptı!",
-                Subject = $"Merhaba {HttpContext.User.Identity.Name}"
-            });
-            return RedirectToAction("Index", "Home");
+                await _emailSender.SendAsync(new EmailMessage()
+                {
+                    Contacts = new string[] { "abc@ww.com" },
+                    Body = $"{HttpContext.User.Identity.Name} Sisteme giriş yaptı!",
+                    Subject = $"Merhaba {HttpContext.User.Identity.Name}"
+                });
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -170,7 +174,6 @@ namespace LiftServiceWebApp.Controllers
                 return View(model);
             }
         }
-
         [Authorize]
         public async Task<IActionResult> Logout()
         {
@@ -178,5 +181,4 @@ namespace LiftServiceWebApp.Controllers
             return RedirectToAction("Index", "Home");
         }
     }
-
 }
