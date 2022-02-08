@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace LiftServiceWebApp.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -59,6 +60,7 @@ namespace LiftServiceWebApp.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -129,7 +131,7 @@ namespace LiftServiceWebApp.Controllers
             return View();
         }
 
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
@@ -155,11 +157,14 @@ namespace LiftServiceWebApp.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
+
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
