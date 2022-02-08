@@ -1,4 +1,5 @@
-﻿using LiftServiceWebApp.Extensions;
+﻿using AutoMapper;
+using LiftServiceWebApp.Extensions;
 using LiftServiceWebApp.Models;
 using LiftServiceWebApp.Models.Identity;
 using LiftServiceWebApp.Services;
@@ -21,17 +22,20 @@ namespace LiftServiceWebApp.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly IEmailSender _emailSender;
+        private readonly IMapper _mapper;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             RoleManager<ApplicationRole> roleManager,
-            IEmailSender emailSender)
+             IEmailSender emailSender,
+             IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _emailSender = emailSender;
+            _mapper = mapper;
             CheckRoles();
         }
 
@@ -194,12 +198,14 @@ namespace LiftServiceWebApp.Controllers
         {
             var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
 
-            var model = new UserProfileViewModel()
-            {
-                Email = user.Email,
-                Name = user.Name,
-                Surname = user.Surname
-            };
+            //var model = new UserProfileViewModel()
+            //{
+            //    Email = user.Email,
+            //    Name = user.Name,
+            //    Surname = user.Surname
+            //};
+
+            var model = _mapper.Map<UserProfileViewModel>(user);
 
             return View(model);
         }

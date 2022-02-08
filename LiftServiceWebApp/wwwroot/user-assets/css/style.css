@@ -1579,14 +1579,13 @@ h2.ss_foot_head {
 
 .s_login {
     position: fixed;
-    top: 20px;
-    bottom: 20px;
+    top: 30px;
+    bottom: 30px;
     left: 0;
     right: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: auto;
     overflow-y: auto;
 }
 

@@ -1,4 +1,5 @@
 using LiftServiceWebApp.Data;
+using LiftServiceWebApp.MapperProfiles;
 using LiftServiceWebApp.Models.Identity;
 using LiftServiceWebApp.Services;
 using Microsoft.AspNetCore.Builder;
@@ -55,6 +56,11 @@ namespace LiftServiceWebApp
                 options.LoginPath = "/Account/Login";
                 options.AccessDeniedPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
+            });
+
+            services.AddAutoMapper(options =>
+            {
+                options.AddProfile(typeof(AccountProfile));
             });
 
             services.AddTransient<IEmailSender, EmailSender>();
