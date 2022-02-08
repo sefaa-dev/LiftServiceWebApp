@@ -1,4 +1,5 @@
-﻿using LiftServiceWebApp.Models;
+﻿using LiftServiceWebApp.Extensions;
+using LiftServiceWebApp.Models;
 using LiftServiceWebApp.Models.Identity;
 using LiftServiceWebApp.Services;
 using LiftServiceWebApp.ViewModels;
@@ -118,7 +119,7 @@ namespace LiftServiceWebApp.Controllers
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Kayıt işleminde bir hata oluştu");
+                ModelState.AddModelError(string.Empty, ModelState.ToFullErrorString());
                 return View(model);
             }
             return View();
@@ -140,6 +141,13 @@ namespace LiftServiceWebApp.Controllers
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             var result = await _userManager.ConfirmEmailAsync(user, code);
             ViewBag.StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
+
+            if (result.Succeeded && _userManager.IsInRoleAsync(user, RoleNames.Passive).Result)
+            {
+                await _userManager.RemoveFromRoleAsync(user, RoleNames.Passive);
+                await _userManager.AddToRoleAsync(user, RoleNames.User);
+            }
+
             return View();
         }
 
@@ -180,5 +188,69 @@ namespace LiftServiceWebApp.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+        [Authorize]
+        public async Task<IActionResult> Profile()
+        {
+            var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
+
+            var model = new UserProfileViewModel()
+            {
+                Email = user.Email,
+                Name = user.Name,
+                Surname = user.Surname
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Profile(UserProfileViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
+
+            user.Name = model.Name;
+            user.Surname = model.Surname;
+
+            if (user.Email != model.Email)//mail adresini değiştirmiş!!!
+            {
+                await _userManager.RemoveFromRoleAsync(user, RoleNames.User);
+                await _userManager.AddToRoleAsync(user, RoleNames.Passive);
+
+                user.Email = model.Email;
+                user.EmailConfirmed = false;
+
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
+                    protocol: Request.Scheme);
+
+                var emailMessage = new EmailMessage()
+                {
+                    Contacts = new string[] { user.Email },
+                    Body =
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.",
+                    Subject = "Confirm your email"
+                };
+
+                await _emailSender.SendAsync(emailMessage);
+            }
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, ModelState.ToFullErrorString());
+            }
+
+            return View(model);
+        }
+
+
     }
 }
