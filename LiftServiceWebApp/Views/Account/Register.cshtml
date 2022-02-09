@@ -1,23 +1,9 @@
 ﻿
 @model RegisterViewModel
 
-@{ Layout = null;}
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-    <title>Kayıt Ol</title>
-    <link rel="stylesheet" href="~/user-assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/user-assets/css/fonts.css" />
-    <link rel="stylesheet" href="~/user-assets/css/fontawesome.min.css" />
-    <link rel="stylesheet" href="~/user-assets/css/magnific-popup.css" />
-    <link rel="stylesheet" href="~/user-assets/css/swiper.min.css" />
-    <link rel="stylesheet" href="~/user-assets/css/animate.css" />
-    <link rel="stylesheet" href="~/user-assets/css/style.css" />
-    <!--=== Favicon Link ===-->
-    <link rel="shortcut icon" type="image/png" href="~/user-assets/images/fav-icon.png">
-</head>
-
+@{ Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewBag.Title = "Kayıt Ol";
+}
 <body class="ss_login_bg">
     <section class="s_login">
         <div class="s_signup ss_box_bg">
@@ -66,15 +52,4 @@
             </form>
         </div>
     </section>
-    <footer>
-        <!--===script start===-->
-        <script src="~/user-assets/js/jquery.min.js"></script>
-        <script src="~/user-assets/js/bootstrap.min.js"></script>
-        <script src="~/user-assets/js/jquery.magnific-popup.min.js"></script>
-        <script src="~/user-assets/js/isotope.pkgd.min.js"></script>
-        <script src="~/user-assets/js/swiper.min.js"></script>
-        <script src="~/user-assets/js/wow.min.js"></script>
-        <script src="~/user-assets/js/script.js"></script>
-    </footer>
-</body>
-</html>
+ </body>
