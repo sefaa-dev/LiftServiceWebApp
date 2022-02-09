@@ -1,4 +1,5 @@
 using LiftServiceWebApp.Data;
+using LiftServiceWebApp.Extensions;
 using LiftServiceWebApp.MapperProfiles;
 using LiftServiceWebApp.Models.Identity;
 using LiftServiceWebApp.Services;
@@ -51,19 +52,15 @@ namespace LiftServiceWebApp
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
 
                 options.LoginPath = "/Account/Login";
                 options.AccessDeniedPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
 
-            services.AddAutoMapper(options =>
-            {
-                options.AddProfile(typeof(AccountProfile));
-            });
+            services.AddApplicationServices(this.Configuration);
 
-            services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddControllersWithViews();
         }
