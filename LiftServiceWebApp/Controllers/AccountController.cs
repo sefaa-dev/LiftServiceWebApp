@@ -261,6 +261,7 @@ namespace LiftServiceWebApp.Controllers
 
             return View(model);
         }
+        [AllowAnonymous]
         public IActionResult ResetPassword()
         {
             return View();
@@ -273,7 +274,7 @@ namespace LiftServiceWebApp.Controllers
 
             if (user == null)
             {
-                ViewBag.Message = "Girdiğiniz email sistemimizde bulunamadı";
+                TempData["Message"] = "Girdiğiniz email sistemimizde bulunamadı";
             }
             else
             {
