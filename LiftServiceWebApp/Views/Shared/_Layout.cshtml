@@ -2,7 +2,6 @@
 
 <html>
 <head>
-    <title>@ViewBag.Title</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -27,17 +26,9 @@
 </head>
 <body>
 
-
     <partial name="Partials/_HeaderPartial" />
-
     @RenderBody()
-
     <partial name="Partials/_FooterPartial" />
-
-
-
-
-
 
     <div class="ss_copywrite">
         <p>&copy Copyright 2023, All right reserved by <a href="index.html">Solar Supplier</a></p>
@@ -50,11 +41,10 @@
     <script src="~/user-assets/js/isotope.pkgd.min.js"></script>
     <script src="~/user-assets/js/swiper.min.js"></script>
     <script src="~/user-assets/js/wow.min.js"></script>
+    <script src="~/user-assets/js/jquery.flot.min.js"></script>
     <script src="~/user-assets/js/script.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 
-
-
-</body>
+</body> 
 </html>

@@ -1,40 +1,40 @@
 ﻿<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-
-
-
-<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
+
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Enlink - Admin Dashboard Template</title>
+    <meta name="description" content="Wissen Akademie ASP.net MVC Eğitimi" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Mehmet Salih Atkan, Fatih Goren, Sefa Yilmaz" />
+    <meta name="MobileOptimized" content="320" />
+    <title>@ViewBag.Title - Asansor Servisi</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/images/logo/favicon.png">
+    <link rel="shortcut icon" href="~/admin-assets/images/logo/favicon.png">
+    <!-- Favicon -->
 
-    <!-- page css -->
-    <!-- Core css -->
-    <link href="assets/css/app.min.css" rel="stylesheet">
+    <!-- CSS -->
+    <link href="~/admin-assets/vendors/nouislider/nouislider.min.css" rel="stylesheet">
+    <link href="~/admin-assets/css/app.min.css" rel="stylesheet">
+    <link href="~/admin-assets/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="~/admin-assets/vendors/select2/select2.css" rel="stylesheet">
+    <link href="~/admin-assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- CSS -->
+
+    @await RenderSectionAsync("Styles", required: false)
 
 </head>
 
 <body>
     <div class="app">
-        <div class="layout">
+        <div class="layout is-side-nav-dark">
             <!-- Header START -->
-            <partial name="Partial/_header"/>
+            <partial name="PartialS/_header" />
             <!-- Header END -->
-
             <!-- Side Nav START -->
-            <partial name="Partial/_side-nav"/>
+            <partial name="PartialS/_left-bar" />
             <!-- Side Nav END -->
-
             <!-- Page Container START -->
             <div class="page-container">
                 <!-- Content Wrapper START -->
@@ -42,32 +42,69 @@
                     @RenderBody()
                 </div>
                 <!-- Content Wrapper END -->
-
                 <!-- Footer START -->
                 <partial name="Partials/_footer" />
                 <!-- Footer END -->
             </div>
             <!-- Page Container END -->
-
             <!-- Search Start-->
-            <partial name="Partials/_search"/>
+            <partial name="Partials/_search" />
             <!-- Search End-->
-
             <!-- Quick View START -->
-            <partial name="Partials/_quick-view"/>
+            <partial name="Partials/_quick-view" />
             <!-- Quick View END -->
 
         </div>
     </div>
 
 
-    <!-- Core Vendors JS -->
-    <script src="assets/js/vendors.min.js"></script>
+    <!-- JS -->
+    <script src="~/admin-assets/js/vendors.min.js"></script>
+    <script src="~/admin-assets/js/app.min.js"></script>
+    <script src="~/admin-assets/js/pages/chat.js"></script>
+    <script src="~/admin-assets/vendors/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/admin-assets/vendors/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="~/admin-assets/js/pages/e-commerce-order-list.js"></script>
+    <script src="~/admin-assets/vendors/select2/select2.min.js"></script>
+    <script src="~/admin-assets/vendors/quill/quill.min.js"></script>
+    <script src="~/admin-assets/js/pages/e-commerce-product-edit.js"></script>
+    <script src="~/admin-assets/js/pages/file-manager.js"></script>
+    <script src="~/admin-assets/js/pages/mail.js"></script>
+    <script src="~/admin-assets/js/pages/project-list.js"></script>
+    <script>
+        $('#trigger-loading-1').on('click', function (e) {
+            $(this).addClass("is-loading");
+            setTimeout(function () { $("#trigger-loading-1").removeClass("is-loading"); }, 4000);
+            e.preventDefault();
+        });
 
-    <!-- page js -->
-    <!-- Core JS -->
-    <script src="assets/js/app.min.js"></script>
+        $('#trigger-loading-2').on('click', function (e) {
+            $(this).toggleClass("is-loading");
+            setTimeout(function () { $("#trigger-loading-2").removeClass("is-loading"); }, 4000);
+            e.preventDefault();
+        });
+    </script>
+    <script src="~/admin-assets/vendors/chartist/chartist.min.js"></script>
+    <script src="~/admin-assets/js/pages/chartist.js"></script>
+    <script src="~/admin-assets/vendors/chartjs/Chart.min.js"></script>
+    <script src="~/admin-assets/js/pages/chartjs.js"></script>
+    <script src="~/admin-assets/js/pages/datatables.js"></script>
+    <script src="~/admin-assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="~/admin-assets/js/pages/form-elements.js"></script>
+    <script src="~/admin-assets/vendors/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/admin-assets/js/pages/form-validation.js"></script>
+    <script src="~/admin-assets/js/pages/dashboard-crm.js"></script>
+    <script src="~/admin-assets/js/pages/dashboard-e-commerce.js"></script>
+    <script src="~/admin-assets/js/pages/dashboard-project.js"></script>
+    <script src="~/admin-assets/js/pages/dashboard-default.js"></script>
+    <script src="~/admin-assets/js/pages/profile.js"></script>
+    <script src="~/admin-assets//js/pages/pricing.js"></script>
+    <script src="~/admin-assets/vendors/nouislider/nouislider.min.js"></script>
+    <script src="~/admin-assets/js/pages/slider.js"></script>
+    <!-- js -->
 
+
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>
