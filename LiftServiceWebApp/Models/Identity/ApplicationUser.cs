@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using LiftServiceWebApp.Entities;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,5 +15,8 @@ namespace LiftServiceWebApp.Models.Identity
         [StringLength(50)]
         public string Surname { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
+
+        public virtual List<Address> Addresses { get; set; }
+        public virtual List<Subscription> Subscriptions { get; set; }
     }
 }
