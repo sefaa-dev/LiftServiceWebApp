@@ -1,4 +1,5 @@
-﻿using LiftServiceWebApp.Models.Identity;
+﻿using LiftServiceWebApp.Entities;
+using LiftServiceWebApp.Models.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,5 +16,9 @@ namespace LiftServiceWebApp.Data
         {
 
         }
+
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
+        public DbSet<SubscriptionType> SubscriptionTypes { get; set; }
     }
 }
