@@ -1,21 +1,21 @@
 {
-  "name": "itservice",
+  "name": "liftservice",
   "version": "1.0.0",
-  "description": "IT Servis Uygulaması",
+  "description": "Asansor Servis Uygulaması",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fg-61/ItServiceApp.git"
+    "url": "git+https://github.com/sefaa-dev/LiftServiceWebApp.git"
   },
-  "author": "Fatih Gören",
+  "author": "Fatih Gören, Mehmet Salih Atkan, Sefa Yılmaz",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fg-61/ItServiceApp/issues"
+    "url": "https://github.com/sefaa-dev/LiftServiceWebApp"
   },
-  "homepage": "https://github.com/fg-61/ItServiceApp#readme",
+  "homepage": "https://github.com/sefaa-dev/LiftServiceWebApp",
   "dependencies": {
     "devextreme": "^21.2.5",
     "devextreme-aspnet-data": "^2.8.6",

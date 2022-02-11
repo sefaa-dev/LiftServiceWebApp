@@ -123,19 +123,15 @@
                             </div>
                             @if (signInManager.IsSignedIn(Context.User))
                             {
-                <a asp-controller="Account" asp-action="Logout" class="white_btn">Çıkış Yap</a> @*var currentUser = userManager.FindByNameAsync(User.Identity.Name).Result;
-
-                                    @if (userManager.IsInRoleAsync(currentUser, RoleNames.Admin).Result)
-                                    {
-                                    <a href="#">Admin Panel <i class="fal fa-long-arrow-right"></i></a>
-                                    }*@
+                                <a asp-controller="Account" asp-action="Logout" class="white_btn">Çıkış Yap</a>
+                           
 
                                 @if (Context.User.IsInRole(RoleNames.Admin))
                                 {
-                <a href="#">Admin Panel <i class="fal fa-long-arrow-right"></i></a>} }
+                                    <a asp-area="Admin" asp-controller="Manage" asp-action="Index" class="white_btn">Admin Panel</a>} }
                             else
                             {
-                        <a asp-controller="Account" asp-action="Login" class="white_btn">Giriş Yap</a>}
+                                <a asp-controller="Account" asp-action="Login" class="white_btn">Giriş Yap</a>}
 
                         </div>
                     </div>

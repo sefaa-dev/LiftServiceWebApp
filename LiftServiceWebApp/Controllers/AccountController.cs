@@ -177,13 +177,15 @@ namespace LiftServiceWebApp.Controllers
 
             if (result.Succeeded)
             {
-                await _emailSender.SendAsync(new EmailMessage()
-                {
-                    Contacts = new string[] { "abc@ww.com" },
-                    Body = $"{HttpContext.User.Identity.Name} Sisteme giriş yaptı!",
-                    Subject = $"Merhaba {HttpContext.User.Identity.Name}"
-                });
-                return RedirectToAction("Index", "Home");
+                //Giriş yapıldığında email gönderir
+
+                //await _emailSender.SendAsync(new EmailMessage()
+                //{
+                //    Contacts = new string[] { "abc@ww.com" },
+                //    Body = $"{HttpContext.User.Identity.Name} Sisteme giriş yaptı!",
+                //    Subject = $"Merhaba {HttpContext.User.Identity.Name}"
+                //});
+                return RedirectToAction("Index", "Home", new { area = "" });
             }
             else
             {
