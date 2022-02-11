@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace LiftServiceWebApp.Areas.Admin.Controllers
 {
-    public class ManageController :  AdminBaseController
+    public class ManageController : AdminBaseController
     {
         public IActionResult Index()
         {
+            return View();
+        }
+        public IActionResult Users()
+        { 
             return View();
         }
 
