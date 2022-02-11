@@ -7,10 +7,9 @@ namespace LiftServiceWebApp.Entities
 {
     public class Address : BaseEntity
     {
-        public string City { get; set; }
-        public string Neighborhood { get; set; }
-        public string State { get; set; }
-        public string Line { get; set; }
+        public string ApartmentBuilding { get; set; }
+        public string ApartmentNo { get; set; }
+        public string AddressString { get; set; }
         public AddressTypes AddressType { get; set; }
     }
 
