@@ -26,14 +26,12 @@ namespace LiftServiceWebApp.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetUsers(DataSourceLoadOptions loadOptions)
         {
-            var users = _userManager.Users.OrderBy(x => x.CreatedDate).ToList();
-            return Ok(new JsonResponseViewModel()
-            {
-                Data = users
-            });
+            var data = _userManager.Users;
+
+            return Ok(DataSourceLoader.Load(data, loadOptions));
         }
 
-        [HttpPut]
+            [HttpPut]
         public async Task<IActionResult> UpdateUsers(string key, string values)
         {
             var data = _userManager.Users.FirstOrDefault(x => x.Id == key);

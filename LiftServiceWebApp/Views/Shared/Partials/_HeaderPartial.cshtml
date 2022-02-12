@@ -16,7 +16,8 @@
                         <a asp-controller="Home" asp-action="Index"> <img src="~/user-assets/images/svg/logo1.svg" class="img-fluid" alt="logo" /></a>
 
                     </div>
-                </div>
+                </div>         
+
                 <div class="col-lg-9 col-md-5 col-sm-12 col-12 align-self-center">
                     <div class="ss_menu">
                         <ul>
@@ -124,7 +125,7 @@
                             @if (signInManager.IsSignedIn(Context.User))
                             {
                                 <a asp-controller="Account" asp-action="Logout" class="white_btn">Çıkış Yap</a>
-                           
+
 
                                 @if (Context.User.IsInRole(RoleNames.Admin))
                                 {
