@@ -35,14 +35,21 @@
                     remoteOperations: { paging: true, filtering: true, sorting: true, grouping: true, summary: true, groupPaging: true },
                     dataSource: DevExpress.data.AspNet.createStore({
                         key: 'id',
-                        loadUrl: `${url}/getusers`
+                        loadUrl: `${url}/getusers`,
+                        updateUrl: `${url}/updateusers`
+
                         //insertUrl: `${url}/InsertOrder`,
-                        //updateUrl: `${url}/UpdateOrder`,
+                      
                         //deleteUrl: `${url}/DeleteOrder`,
                         //onBeforeSend(method, ajaxOptions) {
                         //    ajaxOptions.xhrFields = { withCredentials: true };
                         //}
                     }),
+                    editing: {
+                        mode: 'form',
+                        allowUpdating: true
+                    },
+
                     showColumnLines: true,
                     allowColumnResizing: true,
                     showRowLines: true,
@@ -82,7 +89,8 @@
                             caption: 'Id',
                             dataField: "id",
                             visible: false,
-                            allowFiltering: false
+                            allowFiltering: false,
+                            formItem: { visible: false }
                         },
                         {
                             caption: 'Ad',
@@ -117,7 +125,8 @@
                                     .text("Detay")
                                     .addClass('btn btn-block btn-info btn-sm')
                                     .appendTo(container);
-                            }
+                            },
+                            formItem: { visible: false }
 
                         }
 
