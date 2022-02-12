@@ -7,12 +7,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LiftServiceWebApp.Controllers
+namespace LiftServiceWebApp.Areas.Admin.Controllers
 {
     [Route("api/[controller]/[action]")]
     [Authorize(Roles = "Admin")]
@@ -28,8 +26,11 @@ namespace LiftServiceWebApp.Controllers
         [HttpGet]
         public IActionResult GetUsers(DataSourceLoadOptions loadOptions)
         {
-            var data = _userManager.Users;
-            return Ok(DataSourceLoader.Load(data, loadOptions));
+            var users = _userManager.Users.OrderBy(x => x.CreatedDate).ToList();
+            return Ok(new JsonResponseViewModel()
+            {
+                Data = users
+            });
         }
 
         [HttpPut]

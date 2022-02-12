@@ -3,24 +3,7 @@
 }
 <div class="container-fluid">
     <!-- Page-Title -->
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="page-title-box">
-                <div class="float-end">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="#">Metrica</a>
-                        </li><!--end nav-item-->
-                        <li class="breadcrumb-item">
-                            <a href="#">CRM</a>
-                        </li><!--end nav-item-->
-                        <li class="breadcrumb-item active">Users</li>
-                    </ol>
-                </div>
-                <h4 class="page-title">Contacts</h4>
-            </div><!--end page-title-box-->
-        </div><!--end col-->
-    </div>
+    
     <!-- end page title end breadcrumb -->
     <div class="row">
         <div class="col-12">
@@ -38,43 +21,35 @@
             </div><!--end card-->
         </div> <!--end col-->
     </div><!--end row-->
-
 </div>
-
-@section Styles
-{
-
-}
 
 @section Scripts
 {
-    <script src="~/vendor/devextreme-aspnet-data/js/dx.aspnet.data.js"></script>
+
     <script>
-    var dataGrid = null;
-    $(() => {
-        var url = '../../../api/userapi';
+    $(()=> {
+        var userData = null;
+        $.ajax({
+            url: '@Url.Action("GetUsers","UserApi")',
+            method: 'GET',
+            success: function(response) {
+                console.log(response);
+                if (response.isSuccess) {
+                    userData = response.data;
+                    loadGrid();
+                } else {
+                    alert(response.errorMessage);
+                }
+            },
+        });
         function loadGrid() {
-            dataGrid = $('#dxGrid').dxDataGrid({
-                remoteOperations: { paging: true, filtering: true, sorting: true, grouping: true, summary: true, groupPaging: true },
-                dataSource: DevExpress.data.AspNet.createStore({
-                    key: 'id',
-                    loadUrl: `${url}/getusers`,
-                    updateUrl: `${url}/updateusers`
-                    //insertUrl: `${url}/InsertOrder`,
-                    //deleteUrl: `${url}/DeleteOrder`,
-                    //onBeforeSend(method, ajaxOptions) {
-                    //    ajaxOptions.xhrFields = { withCredentials: true };
-                    //}
-                }),
-                editing: {
-                    mode: 'form',
-                    allowUpdating: true
-                },
+            $('#dxGrid').dxDataGrid({
                 showColumnLines: true,
                 allowColumnResizing: true,
                 showRowLines: true,
                 rowAlternationEnabled: true,
                 showBorders: true,
+                dataSource: userData,
                 searchPanel: {
                     visible: true,
                     width: 240,
@@ -100,16 +75,12 @@
                     allowedPageSizes: [5, 15, 30, 45],
                     showInfo: true
                 },
-                selection: {
-                    mode: "multiple"
-                },
                 columns: [
                     {
                         caption: 'Id',
                         dataField: "id",
                         visible: false,
-                        allowFiltering: false,
-                        formItem: { visible: false }
+                        allowFiltering: false
                     },
                     {
                         caption: 'Ad',
@@ -122,23 +93,10 @@
                     {
                         caption: 'E-Posta',
                         dataField: "email"
-                    },
-                    {
-                        caption: 'Email Onay',
-                        dataField: 'emailConfirmed',
-                        dataType: 'boolean'
-                    },
-                    {
-                        caption: 'Kayıt Tarihi',
-                        dataField: "createdDate",
-                        dataType: "date",
-                        format: 'dd/MM/yyyy',
-                        sortOrder: "desc"
-                    },
-                ],
-            }).dxDataGrid("instance");
+                    }
+                ]
+            });
         }
-        loadGrid();
-    });
+    })
     </script>
 }
