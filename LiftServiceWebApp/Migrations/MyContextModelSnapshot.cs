@@ -19,7 +19,7 @@ namespace LiftServiceWebApp.Migrations
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("LiftServiceWebApp.Entities.Address", b =>
+            modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Address", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -62,7 +62,7 @@ namespace LiftServiceWebApp.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("LiftServiceWebApp.Entities.Subscription", b =>
+            modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Subscription", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -107,7 +107,7 @@ namespace LiftServiceWebApp.Migrations
                     b.ToTable("Subscriptions");
                 });
 
-            modelBuilder.Entity("LiftServiceWebApp.Entities.SubscriptionType", b =>
+            modelBuilder.Entity("LiftServiceWebApp.Models.Entities.SubscriptionType", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -357,7 +357,7 @@ namespace LiftServiceWebApp.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("LiftServiceWebApp.Entities.Address", b =>
+            modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Address", b =>
                 {
                     b.HasOne("LiftServiceWebApp.Models.Identity.ApplicationUser", "User")
                         .WithMany("Addresses")
@@ -366,9 +366,9 @@ namespace LiftServiceWebApp.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("LiftServiceWebApp.Entities.Subscription", b =>
+            modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Subscription", b =>
                 {
-                    b.HasOne("LiftServiceWebApp.Entities.SubscriptionType", "SubscriptionType")
+                    b.HasOne("LiftServiceWebApp.Models.Entities.SubscriptionType", "SubscriptionType")
                         .WithMany()
                         .HasForeignKey("SubscriptionTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
