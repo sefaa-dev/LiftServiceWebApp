@@ -24,5 +24,6 @@
     "filesaver": "^0.0.13",
     "jquery": "^3.6.0",
     "jszip": "^3.7.1"
-  }
+  },
+  "devDependencies": {}
 }
