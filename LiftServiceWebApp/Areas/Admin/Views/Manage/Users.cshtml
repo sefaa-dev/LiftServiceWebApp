@@ -126,22 +126,7 @@
 								.appendTo(container);
 						},
 						formItem: { visible: false }
-					},
-					{
-						caption : "Rol",
-						dataField: "roles.name",
-						lookup: {
-							dataSource: {
-								store: DevExpress.data.AspNet.createStore({
-									key: "id",
-									loadUrl: "../../../api/userapi/userslookup"
-								}),
-								_fnFeatureHtmlPaginate: true,
-								pageSize: 5
-							},
-							displayExpr: "text"
-						}
-				   }
+					}
 			   ]
 			}).dxDataGrid("instance");
 		}

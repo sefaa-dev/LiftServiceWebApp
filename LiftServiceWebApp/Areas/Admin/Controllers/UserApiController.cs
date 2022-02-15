@@ -60,19 +60,5 @@ namespace LiftServiceWebApp.Areas.Admin.Controllers
             return Ok(new JsonResponseViewModel());
         }
 
-        [HttpGet]
-        public object UsersLookup(DataSourceLoadOptions loadOptions)
-        {
-            var data = _dbContext.Roles
-                .Select(x => new
-                {
-                    id = x.Id,
-                    Text = $"{x.Name}"
-                });
-
-            return Ok(DataSourceLoader.Load(data, loadOptions));
-        }
-
-
     }
 }
