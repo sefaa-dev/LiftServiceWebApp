@@ -1,0 +1,34 @@
+﻿@model List<RoleAssignViewModel>
+    <h1>Role Assign</h1>
+    <form asp-action="RoleAssign" asp-controller="Manage">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                    </th>
+                    <th>
+                        Roller
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                <tr>
+                    <td><input type="checkbox" asp-for="@Model[i].HasAssign" /> </td>
+                    <td>
+                        @Model[i].RoleName
+                        <input type="hidden" asp-for="@Model[i].RoleId" />
+                        <input type="hidden" asp-for="@Model[i].RoleName" />
+                    </td>
+                </tr>
+                }
+                <tr>
+                    <td colspan="2">
+                        <button>Rol Ata</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </form>

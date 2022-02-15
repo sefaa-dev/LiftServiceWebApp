@@ -116,12 +116,12 @@
 						sortOrder: "desc"
 					},
 					{
-						caption: 'Detay',
+						caption: 'Rol Atama',
 						cellTemplate: function (container, options) {
 							var current = options.data;
-							var url = '@Url.Action("UserDetail","Manage")' + '/' + current.id;
+							var url = '@Url.Action("RoleAssign","Manage")' + '/' + current.id;
 							$("<a href=" + url + "/>")
-								.text("Detay")
+								.text("Rol Atama")
 								.addClass('btn btn-block btn-info btn-sm')
 								.appendTo(container);
 						},

@@ -19,19 +19,15 @@ namespace LiftServiceWebApp.Areas.Admin.Controllers
     public class UserApiController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly MyContext _dbContext;
-        public UserApiController(UserManager<ApplicationUser> userManager, MyContext dbContext)
+        public UserApiController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
-            _dbContext = dbContext;
         }
 
         [HttpGet]
         public IActionResult GetUsers(DataSourceLoadOptions loadOptions)
         {
             var data = _userManager.Users;
-
-
             return Ok(DataSourceLoader.Load(data, loadOptions));
         }
 
@@ -59,6 +55,5 @@ namespace LiftServiceWebApp.Areas.Admin.Controllers
                 });
             return Ok(new JsonResponseViewModel());
         }
-
     }
 }
