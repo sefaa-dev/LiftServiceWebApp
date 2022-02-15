@@ -1,4 +1,5 @@
 ﻿using DevExtreme.AspNet.Data;
+using LiftServiceWebApp.Areas.ViewModels;
 using LiftServiceWebApp.Data;
 using LiftServiceWebApp.Extensions;
 using LiftServiceWebApp.Models.Identity;
@@ -30,27 +31,43 @@ namespace LiftServiceWebApp.Areas.Admin.Controllers
         public IActionResult GetUsers(DataSourceLoadOptions loadOptions)
         {
             var data = _userManager.Users;
-
-
             return Ok(DataSourceLoader.Load(data, loadOptions));
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateUsers(string key, string values)
         {
+            //Kullanıcı 
             var data = _userManager.Users.FirstOrDefault(x => x.Id == key);
+
             if (data == null)
                 return StatusCode(StatusCodes.Status409Conflict, new JsonResponseViewModel()
                 {
                     IsSuccess = false,
-                    ErrorMessage = "Kullanıcı bulunamadı"
+                    ErrorMessage = "Kullanıcı Bulunamadı"
                 });
 
-            JsonConvert.PopulateObject(values, data);
+            var userRoleUpdateModel = new UserRoleUpdateViewModel();
+            var userOldRole = _dbContext.UserRoles.Where(x => x.UserId == data.Id).Select(x => x.RoleId).Single();
+
+            string oldRoleName = _dbContext.Roles.SingleOrDefault(r => r.Id == userOldRole).Name;
+
+            JsonConvert.PopulateObject(values, userRoleUpdateModel);
+            string newRoleName = _dbContext.Roles.SingleOrDefault(r => r.Id == userRoleUpdateModel.RoleId).Name;
+
+            if (!string.IsNullOrEmpty(userRoleUpdateModel.RoleId))
+            {
+                await _userManager.RemoveFromRoleAsync(data, oldRoleName);
+                await _userManager.AddToRoleAsync(data, newRoleName);
+
+            }
+
+            JsonConvert.PopulateObject(values, data); //değişiklik varsa değişiklik olanları günceller
             if (!TryValidateModel(data))
                 return BadRequest(ModelState.ToFullErrorString());
 
             var result = await _userManager.UpdateAsync(data);
+
             if (!result.Succeeded)
                 return BadRequest(new JsonResponseViewModel()
                 {
@@ -61,18 +78,24 @@ namespace LiftServiceWebApp.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public object UsersLookup(DataSourceLoadOptions loadOptions)
+        public async Task<object> RolesLookup(string userId, DataSourceLoadOptions loadOptions)
         {
+            string role = string.Empty;
+            if(!string.IsNullOrEmpty(userId))
+            {
+                var user = await _userManager.FindByIdAsync(userId);
+                role = _userManager.GetRolesAsync(user).Result.First();
+            }
             var data = _dbContext.Roles
                 .Select(x => new
                 {
-                    id = x.Id,
-                    Text = $"{x.Name}"
+                    Value = x.Id,
+                    Text = $"{x.Name}",
+                    Selected = x.Name == role ? true : false
                 });
 
             return Ok(DataSourceLoader.Load(data, loadOptions));
         }
 
-
-    }
+    } 
 }
