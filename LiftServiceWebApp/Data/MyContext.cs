@@ -12,7 +12,7 @@ namespace LiftServiceWebApp.Data
         {
 
         }
-
+        public DbSet<Failure> Failures { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<SubscriptionType> SubscriptionTypes { get; set; }
