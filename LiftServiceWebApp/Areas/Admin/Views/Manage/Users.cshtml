@@ -127,32 +127,22 @@
 						},
 						formItem: { visible: false }
 					},
-                    {
-                        caption: "Rol Atama",
-                        dataField: "roleId",
-                        lookup: {
-							dataSource:
-							{
-                                store: DevExpress.data.AspNet.createStore({
-                                    key: "id",
-                                    loadUrl: "../../../api/userapi/roleslookup",
-                                    onBeforeSend(method, ajaxOptions) {
-                                        ajaxOptions.data.userId = editingUserId;
-                                        console.log(ajaxOptions);
-                                    }
-                                }),
-                                _fnFeatureHtmlPaginate: true,
-                                pageSize: 10
-                            },
-							displayExpr: "text",
-							valueExpr: "value"
-                        }
-                    }
-				],
-                onEditingStart: function (options) {
-                    editingUserId = options.key;
-                    console.log(editingUserId);
-                }
+					{
+						caption : "Rol",
+						dataField: "roles.name",
+						lookup: {
+							dataSource: {
+								store: DevExpress.data.AspNet.createStore({
+									key: "id",
+									loadUrl: "../../../api/userapi/userslookup"
+								}),
+								_fnFeatureHtmlPaginate: true,
+								pageSize: 5
+							},
+							displayExpr: "text"
+						}
+				   }
+			   ]
 			}).dxDataGrid("instance");
 		}
 		loadGrid();

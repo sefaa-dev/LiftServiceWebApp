@@ -17,10 +17,11 @@
   },
   "homepage": "https://github.com/sefaa-dev/LiftServiceWebApp",
   "dependencies": {
-    "devextreme": "21.2.4",
+    "devextreme": "^21.2.5",
     "devextreme-aspnet-data": "^2.8.6",
     "exceljs": "^4.3.0",
     "file-saver": "^2.0.5",
+    "filesaver": "^0.0.13",
     "jquery": "^3.6.0",
     "jszip": "^3.7.1"
   }
