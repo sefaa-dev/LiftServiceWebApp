@@ -2,9 +2,11 @@
 using LiftServiceWebApp.Extensions;
 using LiftServiceWebApp.Models.Entities;
 using LiftServiceWebApp.Models.Identity;
+using LiftServiceWebApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,20 +26,30 @@ namespace LiftServiceWebApp.Controllers
         {
             return View();
         }
-        
-       
-        [HttpGet]
-        public async Task<IActionResult> GetFailure()
-        {
-            var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
-            var failures = _dbContext.Failures.Where(x => x.UserId == user.Id).ToList();
-            return View(failures);
-        }
+
 
         [HttpGet]
         public IActionResult CreateFailure()
         {
-            return View();
+            //var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
+            //var failures = _dbContext.Failures.Where(x => x.UserId == user.Id).ToList();
+            //List<FailureViewModel> failuresViewModels = new List<FailureViewModel>();
+            //foreach (Failure item in failures)
+            //{
+            //    var failureViewModel = new FailureViewModel()
+            //    {
+            //        FailureName = item.FailureName,
+            //        FailureDescription = item.FailureDescription,
+            //        AddressDetail = item.AddressDetail,
+            //        FailureState = FailureStates.Alındı,
+            //        Latitude = item.Latitude,
+            //        Longitude = item.Longitude
+            //    };
+            //    failuresViewModels.Add(failureViewModel);
+            //}
+            
+            FailureViewModel failureViewModel = new FailureViewModel();
+            return View(failureViewModel);
         }
 
 
@@ -61,7 +73,7 @@ namespace LiftServiceWebApp.Controllers
                 FailureDescription = model.FailureDescription,
                 AddressDetail = model.AddressDetail,
                 UserId = user.Id,
-                FailureState=FailureStates.Alındı,
+                FailureState = FailureStates.Alındı,
                 CreatedDate = DateTime.Now,
                 CreatedUser = user.Id,
                 Latitude = lat,
@@ -70,9 +82,7 @@ namespace LiftServiceWebApp.Controllers
 
             _dbContext.Failures.Add(failure);
             _dbContext.SaveChanges();
-
-
-            return View(model);
+            return View();
         }
 
         [HttpGet]

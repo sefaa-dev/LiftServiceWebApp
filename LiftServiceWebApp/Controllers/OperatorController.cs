@@ -10,6 +10,22 @@ namespace LiftServiceWebApp.Controllers
     {
         public IActionResult IssueAssign()
         {
+            //var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
+            //var failures = _dbContext.Failures.Where(x => x.UserId == user.Id).ToList();
+            //List<FailureViewModel> failuresViewModels = new List<FailureViewModel>();
+            //foreach (Failure item in failures)
+            //{
+            //    var failureViewModel = new FailureViewModel()
+            //    {
+            //        FailureName = item.FailureName,
+            //        FailureDescription = item.FailureDescription,
+            //        AddressDetail = item.AddressDetail,
+            //        FailureState = FailureStates.Alındı,
+            //        Latitude = item.Latitude,
+            //        Longitude = item.Longitude
+            //    };
+            //    failuresViewModels.Add(failureViewModel);
+            //}
             return View();
         }
 
