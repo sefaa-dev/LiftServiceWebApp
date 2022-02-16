@@ -1,34 +1,30 @@
 ﻿@model List<RoleAssignViewModel>
 
-<style>
-
-</style>
 <h4>Rol Atama</h4>
 <hr />
-
 <form asp-action="RoleAssign" asp-controller="Manage">
-	<div class="row">
-		@for (int i = 0; i < Model.Count; i++)
-		{
-			<div class="col-md-6 col-lg-3">
-				<div class="card">
-					<div class="card-body">
-						<div class="media align-items-center">
-							<div>
-								<i><input type="checkbox" asp-for="@Model[i].HasAssign" /></i>
-							</div>
-							<div class="m-l-15">
-								<p class="m-b-0 text-muted">
-									<h2>@Model[i].RoleName</h2>
-									<input type="hidden" asp-for="@Model[i].RoleId" />
-									<input type="hidden" asp-for="@Model[i].RoleName" />
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		}
-	</div>
-	<button class="btn btn-block btn-info btn-sm">Rol Ata</button>
+    <div class="row">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="media align-items-center">
+                            <div>
+                                <i><input type="checkbox" asp-for="@Model[i].HasAssign" /></i>
+                            </div>
+                            <div class="m-l-15">
+                                <p class="m-b-0 text-muted">
+                                    <h2>@Model[i].RoleName</h2>
+                                    <input type="hidden" asp-for="@Model[i].RoleId" />
+                                    <input type="hidden" asp-for="@Model[i].RoleName" />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <button class="btn btn-block btn-info btn-sm">Rol Ata</button>
 </form>
