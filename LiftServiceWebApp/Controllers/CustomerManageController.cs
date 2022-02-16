@@ -24,25 +24,25 @@ namespace LiftServiceWebApp.Controllers
         {
             return View();
         }
-        [HttpGet]
+        
        
         [HttpGet]
         public async Task<IActionResult> GetFailure()
         {
             var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
-            var failures = _dbContext.Failures.Where(x => x.UserId.ToString() == user.Id).ToList();
+            var failures = _dbContext.Failures.Where(x => x.UserId == user.Id).ToList();
             return View(failures);
         }
 
         [HttpGet]
-        public IActionResult CreateFailuree()
+        public IActionResult CreateFailure()
         {
             return View();
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateFailuree(string lat, string lng, Failure model)
+        public async Task<IActionResult> CreateFailure(string lat, string lng, Failure model)
         {
             if (!ModelState.IsValid)
             {
@@ -61,7 +61,7 @@ namespace LiftServiceWebApp.Controllers
                 FailureDescription = model.FailureDescription,
                 AddressDetail = model.AddressDetail,
                 UserId = user.Id,
-                FailureStatus = FailureStates.Alındı.ToString(),
+                FailureState=FailureStates.Alındı,
                 CreatedDate = DateTime.Now,
                 CreatedUser = user.Id,
                 Latitude = lat,

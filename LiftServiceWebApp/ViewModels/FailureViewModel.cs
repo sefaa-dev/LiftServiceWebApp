@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using LiftServiceWebApp.Models.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace LiftServiceWebApp.ViewModels
 {
@@ -12,9 +13,9 @@ namespace LiftServiceWebApp.ViewModels
         [Display(Name = "Arıza Tanım")]
         [StringLength(100)]
         public string FailureDescription { get; set; }
-        public string FailureSatus { get; set; }
-        public float Latitude { get; set; }//Enlem
-        public float Longitude { get; set; }//Boylam
+        public FailureStates FailureState { get; set; }
+        public string? Latitude { get; set; }//Enlem
+        public string? Longitude { get; set; }//Boylam
         [Required(ErrorMessage = "Arıza adres detay bilgileri boş geçilemez.")]
         [Display(Name = "Arıza Adres Detay")]
         [StringLength(70)]
