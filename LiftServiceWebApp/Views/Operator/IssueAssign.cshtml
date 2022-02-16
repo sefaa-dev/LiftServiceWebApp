@@ -4,49 +4,29 @@
     <div class="row">
         @for (int i = 0; i < Model.Count; i++)
         {
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                    <img class="img-fluid" src="assets/images/svg/icon1.svg" alt="image">
-                    <h2>@Model[i].IssueState</h2>
-                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</p>
+                    <h4>@Model[i].CreatedDate</h4>
+                    <h2>Arıza Durumu: @Model[i].FailureState</h2>
+                    <i>Hata Adı:@Model[i].FailureName</i>
+
+                    @{ if (Model[i].TechnicianName == null)
+                        {
+                            <button>Teknisyen Ata</button>
+                        }
+                else
+                {
+                <h2>Teknisyen Adı: @Model[i].TechnicianName</h2>
+                }
+                        }
+
+
+
+
                 </div>
             </div>
         }
 
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="ss_two_sec wow fadeIn" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeIn;">
-                <img class="img-fluid" src="assets/images/svg/icon2.svg" alt="image">
-                <h2>Solar Water Heater</h2>
-                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</p>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="ss_two_sec wow fadeIn" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeIn;">
-                <img class="img-fluid" src="assets/images/svg/icon3.svg" alt="image">
-                <h2>PV Solar Panel</h2>
-                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</p>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="ss_two_sec wow fadeIn" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeIn;">
-                <img class="img-fluid" src="assets/images/svg/icon4.svg" alt="image">
-                <h2>Solar Wind</h2>
-                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</p>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="ss_two_sec wow fadeIn" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeIn;">
-                <img class="img-fluid" src="assets/images/svg/icon1.svg" alt="image">
-                <h2>Solar Plates</h2>
-                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</p>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="ss_two_sec wow fadeIn" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeIn;">
-                <img class="img-fluid" src="assets/images/svg/icon1.svg" alt="image">
-                <h2>Solar Plates</h2>
-                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</p>
-            </div>
-        </div>
+       
     </div>
 </div>

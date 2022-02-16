@@ -20,5 +20,6 @@ namespace LiftServiceWebApp.ViewModels
         [Display(Name = "Arıza Adres Detay")]
         [StringLength(70)]
         public string AddressDetail { get; set; }
+        
     }
 }

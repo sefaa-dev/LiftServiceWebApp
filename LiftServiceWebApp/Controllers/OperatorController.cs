@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LiftServiceWebApp.Data;
+using LiftServiceWebApp.Extensions;
+using LiftServiceWebApp.Models.Entities;
+using LiftServiceWebApp.Models.Identity;
+using LiftServiceWebApp.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,25 +14,32 @@ namespace LiftServiceWebApp.Controllers
 {
     public class OperatorController : Controller
     {
-        public IActionResult IssueAssign()
+        private readonly MyContext _dbContext;
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public OperatorController(MyContext dbContext, UserManager<ApplicationUser> userManager)
         {
-            //var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
-            //var failures = _dbContext.Failures.Where(x => x.UserId == user.Id).ToList();
-            //List<FailureViewModel> failuresViewModels = new List<FailureViewModel>();
-            //foreach (Failure item in failures)
-            //{
-            //    var failureViewModel = new FailureViewModel()
-            //    {
-            //        FailureName = item.FailureName,
-            //        FailureDescription = item.FailureDescription,
-            //        AddressDetail = item.AddressDetail,
-            //        FailureState = FailureStates.Alındı,
-            //        Latitude = item.Latitude,
-            //        Longitude = item.Longitude
-            //    };
-            //    failuresViewModels.Add(failureViewModel);
-            //}
-            return View();
+            _dbContext = dbContext;
+            _userManager = userManager;
+        }
+        public async Task<IActionResult> IssueAssignAsync()
+        {
+
+            var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
+            var failures = _dbContext.Failures.Where(x => x.UserId == user.Id).ToList();
+            List<IssueAssignViewModel> issueAssignViewModels = new List<IssueAssignViewModel>();
+            foreach(Failure item in failures)
+            {
+                var issueAssignViewModel = new IssueAssignViewModel()
+                {
+                    FailureName = item.FailureName,
+                    CreatedDate = item.CreatedDate,
+                    FailureState = FailureStates.Alındı,
+                    TechnicianName = item.TechnicianName,
+                };
+                issueAssignViewModels.Add(issueAssignViewModel);
+            }
+            return View(issueAssignViewModels);
         }
 
     }
