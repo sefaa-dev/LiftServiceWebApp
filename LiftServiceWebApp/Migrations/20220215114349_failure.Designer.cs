@@ -4,14 +4,16 @@ using LiftServiceWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LiftServiceWebApp.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20220215114349_failure")]
+    partial class failure
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,54 +64,6 @@ namespace LiftServiceWebApp.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Failure", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AddressDetail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedUser")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<string>("FailureDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FailureName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FailureState")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Latitude")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Longitude")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedUser")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Failures");
-                });
-
             modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Subscription", b =>
                 {
                     b.Property<Guid>("Id")
@@ -117,8 +71,7 @@ namespace LiftServiceWebApp.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Amount")
-                        .HasPrecision(8, 2)
-                        .HasColumnType("decimal(8,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -131,8 +84,7 @@ namespace LiftServiceWebApp.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("PaidAmount")
-                        .HasPrecision(8, 2)
-                        .HasColumnType("decimal(8,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("SubscriptionTypeId")
                         .HasColumnType("uniqueidentifier");
@@ -182,8 +134,7 @@ namespace LiftServiceWebApp.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(8, 2)
-                        .HasColumnType("decimal(8,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -415,15 +366,6 @@ namespace LiftServiceWebApp.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Failure", b =>
-                {
-                    b.HasOne("LiftServiceWebApp.Models.Identity.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Subscription", b =>

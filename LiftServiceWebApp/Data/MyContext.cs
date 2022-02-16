@@ -12,7 +12,7 @@ namespace LiftServiceWebApp.Data
         {
 
         }
-
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -33,5 +33,6 @@ namespace LiftServiceWebApp.Data
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<SubscriptionType> SubscriptionTypes { get; set; }
+        public DbSet<Failure> Failures { get; set; }
     }
 }

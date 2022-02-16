@@ -343,6 +343,30 @@ namespace LiftServiceWebApp.Controllers
                 return View();
             }
         }
+        [HttpPost]
+        public async Task<IActionResult> PasswordUpdate(PasswordUpdateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
+            var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
+
+            var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                //email gönder
+
+                TempData["Message"] = "Şifre değiştirme işleminiz başarılı";
+                return View();
+            }
+            else
+            {
+                var message = string.Join("<br>", result.Errors.Select(x => x.Description));
+                TempData["Message"] = message;
+                return View();
+            }
+        }
     }
 }
