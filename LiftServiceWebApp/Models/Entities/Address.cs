@@ -10,10 +10,9 @@ namespace LiftServiceWebApp.Models.Entities
         public string ApartmentNo { get; set; }
         public string AddressString { get; set; }
         public AddressTypes AddressType { get; set; }
+
         [StringLength(450)]
         public string UserId { get; set; }
-
-
         [ForeignKey(nameof(UserId))]
         public virtual ApplicationUser User { get; set; }
     }

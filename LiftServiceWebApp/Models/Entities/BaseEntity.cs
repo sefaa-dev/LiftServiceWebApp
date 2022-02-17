@@ -12,6 +12,7 @@ namespace LiftServiceWebApp.Models.Entities
         [StringLength(128)]
         public string CreatedUser { get; set; }
         public DateTime? UpdatedDate { get; set; }
+
         [StringLength(128)]
         public string UpdatedUser { get; set; }
     }

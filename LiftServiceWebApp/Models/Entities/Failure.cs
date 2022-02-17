@@ -7,18 +7,14 @@ namespace LiftServiceWebApp.Models.Entities
     {
         public string FailureName { get; set; }
         public string FailureDescription { get; set; }
-        public string? Latitude { get; set; }//Enlem
-        public string? Longitude { get; set; }//Boylam
+        public string Latitude { get; set; }//Enlem
+        public string Longitude { get; set; }//Boylam
         public string AddressDetail { get; set; }
-        public string TechnicianName { get; set; }
-        public FailureStates FailureState { get; set; }
+        public FailureStates FailureState { get; set; } = FailureStates.Alındı;
         public string TechnicianId { get; set; }
-        [ForeignKey(nameof(TechnicianId))]
         public string UserId { get; set; }
         [ForeignKey(nameof(UserId))]
         public virtual ApplicationUser ApplicationUser { get; set; }
-
-
     }
     public enum FailureStates
     {
