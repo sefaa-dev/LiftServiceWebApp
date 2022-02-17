@@ -35,7 +35,7 @@ namespace LiftServiceWebApp.Controllers
                     FailureName = item.FailureName,
                     CreatedDate = item.CreatedDate,
                     FailureState = FailureStates.Alındı,
-                    TechnicianName = item.TechnicianName,
+                    TechnicianName = item.TechnicianId,
                 };
                 issueAssignViewModels.Add(issueAssignViewModel);
             }
