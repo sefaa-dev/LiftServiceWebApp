@@ -30,12 +30,13 @@ namespace LiftServiceWebApp.Controllers
             List<IssueAssignViewModel> issueAssignViewModels = new List<IssueAssignViewModel>();
             foreach(Failure item in failures)
             {
+                ApplicationUser Technician = await _userManager.FindByIdAsync(item.TechnicianId);
                 var issueAssignViewModel = new IssueAssignViewModel()
                 {
                     FailureName = item.FailureName,
                     CreatedDate = item.CreatedDate,
                     FailureState = FailureStates.Alındı,
-                    TechnicianName = item.TechnicianId,
+                    TechnicianName = $"{Technician.Name} {Technician.Surname}",
                 };
                 issueAssignViewModels.Add(issueAssignViewModel);
             }
