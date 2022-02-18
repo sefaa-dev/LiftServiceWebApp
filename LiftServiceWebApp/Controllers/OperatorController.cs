@@ -43,5 +43,15 @@ namespace LiftServiceWebApp.Controllers
             return View(issueAssignViewModels);
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> IssueAssignAsync(string FailureId)
+        //{
+
+        //    var failure = await _dbContext.Failures.FindAsync(FailureId);
+        //    failure.FailureState = FailureStates.TeknisyenAtandı;
+        //}
+
+
+
     }
 }

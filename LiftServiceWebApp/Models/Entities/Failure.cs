@@ -10,7 +10,7 @@ namespace LiftServiceWebApp.Models.Entities
         public string Latitude { get; set; }//Enlem
         public string Longitude { get; set; }//Boylam
         public string AddressDetail { get; set; }
-        public FailureStates FailureState { get; set; } = FailureStates.Alındı;
+        public FailureStates FailureState { get; set; }
         public string TechnicianId { get; set; }
         public string UserId { get; set; }
         [ForeignKey(nameof(UserId))]
@@ -20,6 +20,7 @@ namespace LiftServiceWebApp.Models.Entities
     {
         Alındı,
         Adreste,
+        TeknisyenAtandı,
         OdemeBekleniyor,
         Sonuclandi
     }
