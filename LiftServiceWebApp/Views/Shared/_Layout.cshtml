@@ -1,9 +1,10 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html lang="en" dir="ltr">
 <head>
 
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Wissen Akademie ASP.net MVC Eğitimi" />
     <meta name="keywords" content="" />
@@ -21,6 +22,10 @@
     <link rel="stylesheet" href="~/user-assets/css/style.css" />
     <!--=== Favicon Link ===-->
     <link rel="shortcut icon" type="image/png" href="~/user-assets/images/fav-icon.png">
+
+    <!-- Extra Assets Css -->
+    <link type="text/css" href="~/extra-assets/css/app.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/extra-assets/css/sweetalert.css">
     @await RenderSectionAsync("Styles", required: false)
 
 </head>
@@ -43,6 +48,18 @@
     <script src="~/user-assets/js/wow.min.js"></script>
     <script src="~/user-assets/js/jquery.flot.min.js"></script>
     <script src="~/user-assets/js/script.js"></script>
+
+    <!-- Extra Assets -->
+    <script src="~/extra-assets/vendor/jquery.min.js"></script>
+    <script src="~/extra-assets/vendor/popper.min.js"></script>
+    <script src="~/extra-assets/vendor/bootstrap.min.js"></script>
+    <script src="~/extra-assets/vendor/perfect-scrollbar.min.js"></script>
+    <script src="~/extra-assets/vendor/dom-factory.js"></script>
+    <script src="~/extra-assets/js/app.js"></script>
+    <script src="~/extra-assets/js/settings.js"></script>
+    <script src="~/extra-assets/vendor/sweetalert.min.js"></script>
+    <script src="~/extra-assets/js/sweetalert.js"></script>
+    <!-- Extra Assets -->
 
     @await RenderSectionAsync("Scripts", required: false)
 

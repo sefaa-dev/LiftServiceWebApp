@@ -1,86 +1,41 @@
 ﻿@{ ViewBag.Title = "Teknisyen Atama Sayfası";}
 @model List<IssueAssignViewModel>
+
+
 <div class="container-fluid ss_service_one ss_section_sec_bg spacer_top spacer_bottom ss_two">
-    <div class="row">
-        @for (int i = 0; i < Model.Count; i++)
-        {
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                    <h4>@Model[i].CreatedDate</h4>
-                    <h2>Arıza Durumu: @Model[i].FailureState</h2>
-                    <i>Hata Adı:@Model[i].FailureName</i>
+	<div class="row">
+		@for (int i = 0; i < Model.Count; i++)
+		{
+			<div class="col-lg-6 col-md-6 col-sm-6">
+				<div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s"
+				 style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+					<h4>@Model[i].CreatedDate</h4>
+					<h2>Arıza Durumu: @Model[i].FailureState</h2>
+					<i>Hata Adı:@Model[i].FailureName</i>
 
-                    @{ if (Model[i].TechnicianName == null)
-                        {
-                            <div class="container-fluid page__container page-section">
-                                <div id="swal-confirm-delete"
-                                     class="d-none"
-                                     data-swal-type="success"
-                                     data-swal-title="Deleted!"
-                                     data-swal-text="Your imaginary file has been deleted."></div>
-                                <div id="swal-cancel-delete"
-                                     class="d-none"
-                                     data-swal-type="error"
-                                     data-swal-title="Cancelled"
-                                     data-swal-text="Your imaginary file is safe :)">
-                                </div>
-                                <div class="col-lg-8 d-flex align-items-center">
-                                    <div class="flex"
-                                         style="max-width: 100%">
-                                        <button class="btn btn-success"
-                                                data-toggle="swal"
-                                                data-swal-title="Are you sure?"
-                                                data-swal-text="You will not be able to recover this imaginary file!"
-                                                data-swal-type="warning"
-                                                data-swal-confirm-button-text="Yes, delete it!"
-                                                data-swal-confirm-cb="#swal-confirm-delete"
-                                                data-swal-show-cancel-button="true"
-                                                data-swal-cancel-button-text="No, cancel please!"
-                                                data-swal-cancel-cb="#swal-cancel-delete"
-                                                data-swal-close-on-confirm="false"
-                                                data-swal-close-on-cancel="false">
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                        }
-                        else
-                        {
-                            <h2>Teknisyen Adı: @Model[i].TechnicianName</h2>
-                        }
-                    }
-                </div>
-            </div>
-        }
-    </div>
+					@{
+						if (Model[i].TechnicianName == null)
+						{
+							<div class="container-fluid page__container page-section">
+								<div id="swal-confirm-delete" class="d-none" data-swal-type="success" data-swal-title="Deleted!"														data-swal-text="Your imaginary file has been deleted."></div>
+								<div id="swal-cancel-delete" class="d-none" data-swal-type="error" data-swal-title="Cancelled"															data-swal-text="Your imaginary file is safe :)">
+								</div>
+								<div class="col-lg-8 d-flex align-items-center">
+									<div class="flex" style="max-width: 100%">
+										<button class="btn btn-success" data-toggle="swal" data-swal-title="Are you sure?"																		data-swal-text="You will not be able to recover this imaginary file!" data-swal-type="warning"														data-swal-confirm-button-text="Yes,delete it!" data-swal-confirm-cb="#swal-confirm-delete"															data-swal-show-cancel-button="true" data-swal-cancel-button-text="No, cancel please!"																data-swal-cancel-cb="#swal-cancel-delete" data-swal-close-on-confirm="false"																		data-swal-close-on-cancel="false">
+										Confirm and Cancel
+										</button>
+									</div>
+								</div>
+							</div>
+						}
+						else
+						{
+							<h2>Teknisyen Adı: @Model[i].TechnicianName</h2>
+						}
+					}
+				</div>
+			</div>
+		}
+	</div>
 </div>
-
-
-@section Style
-{
-    <!-- App CSS -->
-    <link type="text/css" href="assets/css/app.css" rel="stylesheet">
-    <!-- Sweet Alert -->
-    <link rel="stylesheet" href="assets/css/sweetalert.css">
-}
-
-@section Scripts
-{
-    <!-- jQuery -->
-    <script src="assets/vendor/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="assets/vendor/popper.min.js"></script>
-    <script src="assets/vendor/bootstrap.min.js"></script>
-    <!-- Perfect Scrollbar -->
-    <script src="assets/vendor/perfect-scrollbar.min.js"></script>
-    <!-- DOM Factory -->
-    <script src="assets/vendor/dom-factory.js"></script>
-    <!-- App JS -->
-    <script src="assets/js/app.js"></script>
-    <!-- Global Settings -->
-    <script src="assets/js/settings.js"></script>
-    <!-- Sweet Alert -->
-    <script src="assets/vendor/sweetalert.min.js"></script>
-    <script src="assets/js/sweetalert.js"></script>
-}
