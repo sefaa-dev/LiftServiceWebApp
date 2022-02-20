@@ -57,6 +57,13 @@ namespace LiftServiceWebApp.Controllers
             _dbContext.SaveChanges();
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> GetFailures()
+        {
+            var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
+            var failures = _dbContext.Failures.Where(x => x.UserId == user.Id).ToList();
+            return View(failures);
+        }
 
         //[HttpGet]
         //public IActionResult UpdateFailure(Guid id)
