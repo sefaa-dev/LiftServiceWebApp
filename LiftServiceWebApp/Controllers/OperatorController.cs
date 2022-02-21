@@ -25,37 +25,11 @@ namespace LiftServiceWebApp.Controllers
         // Arızaları Görüntüleme
         public async Task<IActionResult> Failures()
         {
+            // Arızalar
             var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
-            var failures = _dbContext.Failures.ToList();
-            List<IssueAssignViewModel> issueAssignViewModels = new List<IssueAssignViewModel>();
-            foreach (Failure item in failures)
-            {
-                ApplicationUser Technician = await _userManager.FindByIdAsync(item.TechnicianId);
-                var issueAssignViewModel = new IssueAssignViewModel()
-                {
-                    FailureName = item.FailureName,
-                    CreatedDate = item.CreatedDate,
-                    FailureState = FailureStates.Alındı,
-                    FailureId = item.Id.ToString()
-                };
-                // Teknisyen null gelince Technician.Name ve Technician.Surname null reference hatası veriyor
-                // Bunu engellemek için if else yazıldı
-                if (Technician == null)
-                {
-                    issueAssignViewModel.TechnicianName = null;
-                }
-                else
-                {
-                    issueAssignViewModel.TechnicianName = $"{Technician.Name} {Technician.Surname}";
-                }
-                issueAssignViewModels.Add(issueAssignViewModel);
-            }
-            return View(issueAssignViewModels);
-        }
-        // Teknisyen Atama
-        public async Task<IActionResult> TechnicianAssign(List<IssueAssignViewModel> failures)
-        {
-            // kuyruk atama eklenecek
+            var failures = _dbContext.Failures.Where(x => x.TechnicianId == null).ToList();
+
+            // Teknisyenler
             var technicians = await _userManager.GetUsersInRoleAsync("Technician");
             List<TechnicianAssignViewModel> technicianList = new List<TechnicianAssignViewModel>();
             foreach (var item in technicians)
@@ -63,23 +37,38 @@ namespace LiftServiceWebApp.Controllers
                 TechnicianAssignViewModel technicianAssignViewModel = new TechnicianAssignViewModel
                 {
                     TechnicianId = item.Id,
-                    TechnicianName = item.Name,
-                    HasAssign = false,
-                    FailureId = failures.FirstOrDefault().FailureId.ToString()
+                    TechnicianName = $"{item.Name} {item.Surname}"
                 };
                 technicianList.Add(technicianAssignViewModel);
             }
-            return View(technicianList);
+            ViewBag.Technicians = technicianList;
+            return View(failures);
         }
 
-        [HttpPost]
-        public IActionResult TechnicianAssign(List<TechnicianAssignViewModel> technicianAssignViewModels)
+        //[HttpPost]
+        //public async Task<IActionResult> Failures(List<IssueAssignViewModel> issueAssignViewModels)
+        //{
+
+        //    return View(issueAssignViewModels);
+        //}
+
+
+
+        // Teknisyen Atama
+        public IActionResult TechnicianAssign(TechnicianAssignViewModel technicianAssignViewModel)
         {
-            //var issue = issueAssignViewModel.FirstOrDefault();
-            //if (issue == null)
-            //    return View();
-            //Failure failure = _dbContext.Failures.Where(x => x.Id.ToString() == issue.FailureId).Single();
-            return View();
+            var item = technicianAssignViewModel;
+            return View(item);
         }
+
+        //[HttpPost]
+        //public IActionResult TechnicianAssign(List<TechnicianAssignViewModel> technicianAssignViewModels)
+        //{
+        //    //var issue = issueAssignViewModel.FirstOrDefault();
+        //    //if (issue == null)
+        //    //    return View();
+        //    //Failure failure = _dbContext.Failures.Where(x => x.Id.ToString() == issue.FailureId).Single();
+        //    return View();
+        //}
     }
 }

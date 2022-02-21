@@ -6,36 +6,28 @@
 <div class="container-fluid ss_service_one ss_section_sec_bg spacer_top spacer_bottom ss_two">
 	<form asp-action="TechnicianAssign" asp-controller="Operator">
 		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6">
-				<div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s"
-					 style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+			<div class="col-lg-12 col-md-6 col-sm-6">
+                <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s"
+                     style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
 
-					@if (Model.Count > 0)
-					{
-						for (int i = 0; i < Model.Count; i++)
-						{
-							<div>
-                                <i><input type="radio" asp-for="@Model[i].HasAssign" value="@Model[i].HasAssign"/></i>
-                            </div>
-                            <div class="m-l-15">
-                                <p class="m-b-0 text-muted">
-                                    <h2>@Model[i].TechnicianName</h2>
-                                </p>
-                            </div>
+                    @if (Model.Count > 0)
+                    {
+                        for (int i = 0; i < Model.Count; i++)
+                        {
+                            <input type="radio" id="radioId" name="Teknisyen" value="@Model[i].HasAssign" asp-for="@Model[i].HasAssign">
+                            <label for="radioId">@Model[i].TechnicianName</label><br>
 
-							<input type="hidden" asp-for="@Model[i].TechnicianId" />
-							<input type="hidden" asp-for="@Model[i].TechnicianName" />
-							<input type="hidden" asp-for="@Model[i].FailureId"/>
-						}
-					}
-					else
-					{
-						<h2>Henüz Teknisyen Atanmadı</h2>
-					}
-					
-
-					<button class="btn btn-block btn-info btn-sm">Teknisyeni Ata</button>
-				</div>
+                            <input type="hidden" asp-for="@Model[i].TechnicianId" />
+                            <input type="hidden" asp-for="@Model[i].TechnicianName" />
+                            <input type="hidden" asp-for="@Model[i].FailureId" />
+                        }
+                        <button class="btn btn-block btn-info btn-sm">Teknisyeni Ata</button>
+                    }
+                    else
+                    {
+                        <h2>Henüz Teknisyen Atanmadı</h2>
+                    }
+                </div>
 			</div>
 		</div>
 	</form>
