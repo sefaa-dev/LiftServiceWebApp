@@ -1,0 +1,33 @@
+﻿@{ ViewBag.Title = "Arızalar";}
+@model List<IssueAssignViewModel>
+
+
+<div class="container-fluid ss_service_one ss_section_sec_bg spacer_top spacer_bottom ss_two">
+	<div class="row">
+		@for (int i = 0; i < Model.Count; i++)
+		{
+			<div class="col-lg-6 col-md-6 col-sm-6">
+				<div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s"
+				 style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+					<i>@Model[i].CreatedDate</i>
+					<h2>Arıza Durumu: @Model[i].FailureState</h2>
+					<i>Hata Adı: @Model[i].FailureName</i>
+
+					@{
+						if (Model[i].TechnicianName == null)
+						{
+							<form method="get" asp-action=TechnicianAssign asp-controller="Operator">
+								<i><input type="hidden" asp-for="@Model[i].FailureId" /></i>
+								<button class="btn btn-block btn-success">Teknisyen Ata</button>
+							</form>
+						}
+						else
+						{
+							<h2>Teknisyen Adı: @Model[i].TechnicianName</h2>
+						}
+					}
+				</div>
+			</div>
+		}
+	</div>
+</div>
