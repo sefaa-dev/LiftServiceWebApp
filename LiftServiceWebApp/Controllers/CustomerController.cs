@@ -1,12 +1,11 @@
-﻿using LiftServiceWebApp.Data;
+﻿using DevExtreme.AspNet.Data;
+using LiftServiceWebApp.Data;
 using LiftServiceWebApp.Extensions;
 using LiftServiceWebApp.Models.Entities;
 using LiftServiceWebApp.Models.Identity;
-using LiftServiceWebApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,7 +30,10 @@ namespace LiftServiceWebApp.Controllers
         {
             return View();
         }
-
+        public IActionResult Failures()
+        {
+            return View();
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreateFailure(string lat, string lng, Failure model)
@@ -57,13 +59,7 @@ namespace LiftServiceWebApp.Controllers
             _dbContext.SaveChanges();
             return View();
         }
-        [HttpGet]
-        public async Task<IActionResult> GetFailures()
-        {
-            var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
-            var failures = _dbContext.Failures.Where(x => x.UserId == user.Id).ToList();
-            return View(failures);
-        }
+        
 
         //[HttpGet]
         //public IActionResult UpdateFailure(Guid id)

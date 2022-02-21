@@ -28,27 +28,27 @@
     <script>
 	var datagrid = null;
 	$(() => {
-		var url = '../../../api/customer';
+		var url = '../../../api/failureapi';
 
 		function loadGrid() {
 			dataGrid = $('#dxGrid').dxDataGrid({
 				remoteOperations: { paging: true, filtering: true, sorting: true, grouping: true, summary: true, groupPaging: true },
 				dataSource: DevExpress.data.AspNet.createStore({
 					key: 'id',
-					loadUrl: `${url}/getfailure`,
+					loadUrl: `${url}/getfailures`
 					//updateUrl: `${url}/updatefailure`
 
 					//insertUrl: `${url}/InsertOrder`,
 
-					deleteUrl: `${url}/deletefailure`,
+					/*deleteUrl: `${url}/deletefailure`,*/
 					//onBeforeSend(method, ajaxOptions) {
 					//    ajaxOptions.xhrFields = { withCredentials: true };
 					//}
 				}),
-				editing: {
-					mode: 'form',
-					allowUpdating: true,
-				},
+				//editing: {
+				//	mode: 'form',
+				//	allowUpdating: true,
+				//},
 				showColumnLines: true,
 				allowColumnResizing: true,
 				showRowLines: true,
@@ -67,11 +67,11 @@
 				headerFilter: {
 					visible: true
 				},
-				export: {
-					enabled: true,
-					fileName: `Arıza Servis Talepleri_${parseInt(Math.random() * 1000000000)}`,
-					allowExportSelectedData: true
-				},
+				//export: {
+				//	enabled: true,
+				//	fileName: `Arıza Servis Talepleri_${parseInt(Math.random() * 1000000000)}`,
+				//	allowExportSelectedData: true
+				//},
 				paging: {
 					pageSize: 20
 				},
@@ -80,9 +80,9 @@
 					allowedPageSizes: [5, 15, 30, 45],
 					showInfo: true
 				},
-				selection: {
-					mode: "multiple"
-				},
+				//selection: {
+				//	mode: "multiple"
+				//},
 				columns: [
 					{
 						caption: 'Id',
@@ -93,15 +93,15 @@
 					},
 					{
 						caption: 'Arıza',
-						dataField: "failurename"
+						dataField: "failureName"
 					},
 					{
 						caption: 'Açıklama',
-						dataField: "failuredescription"
+						dataField: "failureDescription"
 					},
 					{
                         caption: 'Durum',
-                        dataField: "failurestate"
+                        dataField: "failureState"
 					},
 					
 					{
@@ -110,8 +110,8 @@
 						dataType: "date",
 						format: 'dd/MM/yyyy',
 						sortOrder: "desc"
-					},
-					{
+					}
+					@*{
 						caption: 'Düzenle',
 						cellTemplate: function (container, options) {
 							var current = options.data;
@@ -122,7 +122,7 @@
 								.appendTo(container);
 						},
 						formItem: { visible: false }
-					}
+					}*@
 			   ]
 			}).dxDataGrid("instance");
 		}

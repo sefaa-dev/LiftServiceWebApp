@@ -38,8 +38,6 @@ function konumBul() {
                             position: e["latLng"],
                             title: "Hello World!"
                         });
-                        
-
                     }
                     marker.setMap(map);
 
