@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Arıza Kaydı Güncelle";
+}
+@model FailureViewModel
+<Style>
+    #map {
+        height: 400px;
+        width: 100%;
+        border: 1px solid black;
+    }
+
+    .text-center {
+        margin: auto;
+    }
+</Style>
+
+
+
+<section class="ss_pv_one spacer_top">
+    <div class="container-fluid">
+        <div class="user-actions mb-40">
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+        <form asp-action="UpdateFailure" method="post">
+            <input type="hidden" id="lng" name="lng" />
+            <input type="hidden" id="lat" name="lat" />
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="col-lg-12" id="map">
+                        <div id="floating-panel">
+
+                        </div>
+                        <div id="map"></div>
+                        <p>Haritaden adresinizi işaretleyiniz.</p>
+                    </div>
+
+                </div>
+                <div class="col-lg-6">
+                    <div class="billing-details">
+                        <h3 class="title">Arıza Kaydı Güncelle</h3>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Arıza Bilgisi</label>
+                                    <input asp-for="@Model.FailureName" type="text" class="form-control" placeholder="Arıza bilgisi">
+                                    <span asp-validation-for="@Model.FailureName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Arıza Açıklama</label>
+                                    <textarea asp-for="@Model.FailureDescription" type="" class="form-control" placeholder="Arıza açıklama:">
+                                    </textarea>
+                                    <span asp-validation-for="@Model.FailureDescription" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Adres Detay</label>
+                                    <input asp-for="@Model.AddressDetail" type="text" class="form-control" placeholder="bina adı -daire no">
+                                    <span asp-validation-for="@Model.AddressDetail" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-8"></div>
+                            <div class="text-center">
+
+                                <button type="submit" class="ss_btn submitForm">Kaydet</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <br /><br /><br />
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</section>
+
+@section Scripts{
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_a4OS5hL9_7MO-qrcwx0_9g_UAmOgLKE"></script>
+    <script src="~/user-assets/js/harita.js"></script>
+}

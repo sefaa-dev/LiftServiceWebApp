@@ -12,7 +12,8 @@ namespace LiftServiceWebApp.Extensions
         {
             services.AddAutoMapper(options =>
             {
-                options.AddProfile(typeof(AccountProfile));
+                options.AddProfile(typeof(AccountProfile)); 
+                options.AddProfile(typeof(FailureProfile));
                 options.AddProfile(typeof(PaymentProfile));
             });
 

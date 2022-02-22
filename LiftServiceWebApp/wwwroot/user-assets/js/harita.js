@@ -46,9 +46,6 @@ function konumBul() {
                     console.log("lat", marker.getPosition().lat());
                     console.log("lng", marker.getPosition().lng());
                 });
-                
-                /*console.log(marker.getPosition().lat());*/
-
             });
 
         }, function (error) {

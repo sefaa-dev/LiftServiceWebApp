@@ -1,12 +1,12 @@
-﻿using DevExtreme.AspNet.Data;
+﻿using AutoMapper;
 using LiftServiceWebApp.Data;
 using LiftServiceWebApp.Extensions;
 using LiftServiceWebApp.Models.Entities;
 using LiftServiceWebApp.Models.Identity;
+using LiftServiceWebApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LiftServiceWebApp.Controllers
@@ -15,11 +15,15 @@ namespace LiftServiceWebApp.Controllers
     {
         private readonly MyContext _dbContext;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IMapper _mapper;
 
-        public CustomerController(MyContext dbContext, UserManager<ApplicationUser> userManager)
+
+
+        public CustomerController(MyContext dbContext, UserManager<ApplicationUser> userManager, IMapper mapper)
         {
             _dbContext = dbContext;
             _userManager = userManager;
+            _mapper = mapper;
         }
         public IActionResult Index()
         {
@@ -59,51 +63,49 @@ namespace LiftServiceWebApp.Controllers
             _dbContext.SaveChanges();
             return View();
         }
-        
+        [HttpGet]
+        public IActionResult UpdateFailure(Guid id)
+        {
+            var failure = _dbContext.Failures.Find(id);
+            if (failure == null)
+            {
 
-        //[HttpGet]
-        //public IActionResult UpdateFailure(Guid id)
-        //{
-        //    var failure = _dbContext.Failures.Find(id);
-        //    if (failure == null)
-        //    {
+            }
+            FailureViewModel VMFailure = _mapper.Map<FailureViewModel>(failure);
+                return View(VMFailure);
+        }
 
-        //    }
+        [HttpPost]
+        public IActionResult UpdateFailure(string lat, string lng, Failure model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
-        //    return View(failure);
-        //}
+            Failure failure = _dbContext.Failures.Find(model.Id);
+            failure.FailureName = model.FailureName;
+            failure.FailureDescription = model.FailureDescription;
+            failure.AddressDetail = model.AddressDetail;
+            failure.UpdatedDate = DateTime.Now;
+            failure.Latitude = lat;
+            failure.Longitude = lng;
 
-        //[HttpPost]
-        //public IActionResult UpdateFailure(string lat, string lng, Failure model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model);
-        //    }
+            _dbContext.SaveChanges();
+            return RedirectToAction("GetFailures");
+        }
+        public IActionResult DeleteFailure(string id)
+        {
+            var failure = _dbContext.Failures.Find(id);
+            if (failure == null)
+            {
 
-        //    Failure failure = _dbContext.Failures.Find(model.Id);
-        //    failure.FailureName = model.FailureName;
-        //    failure.FailureDescription = model.FailureDescription;
-        //    failure.AddressDetail = model.AddressDetail;
-        //    failure.UpdatedDate = DateTime.Now;
-        //    failure.Latitude = lat;
-        //    failure.Longitude = lng;
+            }
 
-        //    _dbContext.SaveChanges();
-        //    return RedirectToAction("GetFailures");
-        //}
-        //public IActionResult DeleteIssue(Guid id)
-        //{
-        //    var issue = _dbContext.Failures.Find(id);
-        //    if (issue == null)
-        //    {
+            _dbContext.Remove(failure);
+            _dbContext.SaveChanges();
 
-        //    }
-
-        //    _dbContext.Remove(issue);
-        //    _dbContext.SaveChanges();
-
-        //    return RedirectToAction("GetIssues");
-        //}
+            return RedirectToAction("GetFailures");
+        }
     }
 }

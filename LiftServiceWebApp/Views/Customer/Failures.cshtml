@@ -110,19 +110,22 @@
 						dataType: "date",
 						format: 'dd/MM/yyyy',
 						sortOrder: "desc"
-					}
-					@*{
+					},
+					{
 						caption: 'Düzenle',
 						cellTemplate: function (container, options) {
 							var current = options.data;
-							var url = '@Url.Action("FailureUpdate","Customer")' + '/' + current.id;
+							var url = '@Url.Action("UpdateFailure", "Customer")' + '/' + current.id;
+                            console.log(url);
+							console.log(current.id);
+
 							$("<a href=" + url + "/>")
 								.text("Düzenle")
 								.addClass('btn btn-block btn-info btn-sm')
 								.appendTo(container);
 						},
 						formItem: { visible: false }
-					}*@
+					}
 			   ]
 			}).dxDataGrid("instance");
 		}

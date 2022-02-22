@@ -27,5 +27,10 @@ namespace LiftServiceWebApp.Controllers
             //return View(failures);
             return Ok(DataSourceLoader.Load(data, loadOptions));
         }
+        [HttpPut]
+        public IActionResult UpdateFailure()
+        {
+            return View();
+        }
     }
 }
