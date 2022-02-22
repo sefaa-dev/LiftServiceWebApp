@@ -92,9 +92,9 @@ namespace LiftServiceWebApp.Controllers
             failure.Longitude = lng;
 
             _dbContext.SaveChanges();
-            return RedirectToAction("GetFailures");
+            return RedirectToAction("Failures");
         }
-        public IActionResult DeleteFailure(string id)
+        public IActionResult DeleteFailure(Guid id)
         {
             var failure = _dbContext.Failures.Find(id);
             if (failure == null)
@@ -105,7 +105,7 @@ namespace LiftServiceWebApp.Controllers
             _dbContext.Remove(failure);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("GetFailures");
+            return RedirectToAction("Failures");
         }
     }
 }

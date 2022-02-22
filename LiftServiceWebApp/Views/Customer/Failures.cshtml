@@ -103,7 +103,7 @@
                         caption: 'Durum',
                         dataField: "failureState"
 					},
-					
+
 					{
 						caption: 'Kayıt Tarihi',
 						dataField: "createdDate",
@@ -121,6 +121,21 @@
 
 							$("<a href=" + url + "/>")
 								.text("Düzenle")
+								.addClass('btn btn-block btn-info btn-sm')
+								.appendTo(container);
+						},
+						formItem: { visible: false }
+					},
+					{
+						caption: 'Sil',
+						cellTemplate: function (container, options) {
+							var current = options.data;
+							var url = '@Url.Action("DeleteFailure", "Customer")' + '/' + current.id;
+                            console.log(url);
+							console.log(current.id);
+
+							$("<a href=" + url + "/>")
+								.text("Sil")
 								.addClass('btn btn-block btn-info btn-sm')
 								.appendTo(container);
 						},
