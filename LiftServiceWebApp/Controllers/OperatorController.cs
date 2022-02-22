@@ -22,8 +22,8 @@ namespace LiftServiceWebApp.Controllers
             _dbContext = dbContext;
             _userManager = userManager;
         }
-        // Arızaları Görüntüleme
-        public async Task<IActionResult> Failures()
+        // Atanmayan Arızaları Görüntüleme
+        public async Task<IActionResult> FailureAssign()
         {
             // Arızalar
             var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
@@ -45,30 +45,46 @@ namespace LiftServiceWebApp.Controllers
             return View(failures);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Failures(List<IssueAssignViewModel> issueAssignViewModels)
-        //{
-
-        //    return View(issueAssignViewModels);
-        //}
-
-
-
-        // Teknisyen Atama
-        public IActionResult TechnicianAssign(TechnicianAssignViewModel technicianAssignViewModel)
+        // Teknisyen Atama ve Atanan Arızaları Görüntüleme
+        [HttpPost]
+        public async Task<IActionResult> FailureAssign(string technicianId, string failureId)
         {
-            var item = technicianAssignViewModel;
-            return View(item);
+            var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
+            var failure = _dbContext.Failures.Where(x => x.Id.ToString() == failureId).SingleOrDefault();
+            failure.TechnicianId = technicianId;
+            failure.FailureState = FailureStates.TeknisyenAtandı;
+            failure.UpdatedUser = user.UserName;
+            failure.UpdatedDate = DateTime.Now;
+            _dbContext.Update(failure);
+            _dbContext.SaveChanges();
+            return RedirectToAction("GetFailure", "Operator");
         }
 
-        //[HttpPost]
-        //public IActionResult TechnicianAssign(List<TechnicianAssignViewModel> technicianAssignViewModels)
-        //{
-        //    //var issue = issueAssignViewModel.FirstOrDefault();
-        //    //if (issue == null)
-        //    //    return View();
-        //    //Failure failure = _dbContext.Failures.Where(x => x.Id.ToString() == issue.FailureId).Single();
-        //    return View();
-        //}
+        public async Task<IActionResult> GetFailure()
+        {
+            var failures = _dbContext.Failures.ToList();
+            List<AssignedFailureViewModel> assignedFailureViewModels = new List<AssignedFailureViewModel>();
+            foreach (var item in failures)
+            {
+                var technician = await _userManager.FindByIdAsync(item.TechnicianId);
+                string technicianName;
+                if (technician == null)
+                    technicianName = null;
+                else
+                    technicianName = $"{ technician.Name } {technician.Surname}";
+                assignedFailureViewModels.Add(new AssignedFailureViewModel
+                {
+                    FailureName = item.FailureName,
+                    FailureDescription = item.FailureDescription,
+                    AddressDetail = item.AddressDetail,
+                    Latitude = item.Latitude,
+                    Longitude = item.Longitude,
+                    CreatedDate = item.CreatedDate,
+                    FailureState = item.FailureState,
+                    TechnicianName = technicianName
+                });
+            }
+            return View(assignedFailureViewModels);
+        }
     }
 }
