@@ -29,8 +29,7 @@
                                 <td>@Model[i - 1].AddressDetail</td>
                                 <td>@Model[i - 1].CreatedDate</td>
                                 <td>
-                                    <select class="form-select btn-info dropdown-toggle" asp-for="@Model[i-1].TechnicianId" id="technician" name="technician">
-                                        @* <option selected>Teknisyen Seç</option>*@
+                                    <select class="form-select btn btn-info" asp-for="@Model[i-1].TechnicianId" id="technician" name="technician">
                                         <option value="none" selected disabled hidden>Teknisyen Seçiniz</option>
                                         @foreach (TechnicianAssignViewModel item in ViewBag.Technicians)
                                         {
@@ -42,7 +41,6 @@
                                 </td>
                             </tr>
                         }
-
                     </tbody>
                 </table>
             </div>
@@ -78,6 +76,5 @@
                 }
             });
         });
-                                //});
     </script>
 }

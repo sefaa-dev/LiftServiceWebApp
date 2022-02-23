@@ -19,8 +19,9 @@ namespace LiftServiceWebApp.Models.Entities
     public enum FailureStates
     {
         Alındı,
-        Adreste,
-        TeknisyenAtandı,
+        Yonlendirildi,
+        KabulEdildi,
+        YolaCikildi,
         OdemeBekleniyor,
         Sonuclandi
     }

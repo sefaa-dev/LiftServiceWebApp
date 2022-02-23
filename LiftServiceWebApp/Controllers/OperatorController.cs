@@ -52,7 +52,7 @@ namespace LiftServiceWebApp.Controllers
             var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
             var failure = _dbContext.Failures.Where(x => x.Id.ToString() == failureId).SingleOrDefault();
             failure.TechnicianId = technicianId;
-            failure.FailureState = FailureStates.TeknisyenAtandı;
+            failure.FailureState = FailureStates.Yonlendirildi;
             failure.UpdatedUser = user.UserName;
             failure.UpdatedDate = DateTime.Now;
             _dbContext.Update(failure);

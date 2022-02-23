@@ -50,7 +50,7 @@
                                 <tbody>
                                     @for (int i = 1; i <= Model.Count(); i++)
                                     {
-                                        @if (Model[i-1].FailureState == FailureStates.Alındı)
+                                        @if (Model[i - 1].FailureState == FailureStates.Alındı)
                                         {
                                             <tr>
                                                 <th scope="row">@i</th>
@@ -83,7 +83,7 @@
                                 <tbody>
                                     @for (int i = 1; i <= Model.Count(); i++)
                                     {
-                                        @if (Model[i - 1].FailureState == FailureStates.TeknisyenAtandı)
+                                        @if (Model[i - 1].FailureState == FailureStates.Yonlendirildi)
                                         {
                                             <tr>
                                                 <th scope="row">@i</th>
@@ -116,7 +116,7 @@
                                 <tbody>
                                     @for (int i = 1; i <= Model.Count(); i++)
                                     {
-                                        @if (Model[i - 1].FailureState == FailureStates.Adreste)
+                                        @if (Model[i - 1].FailureState == FailureStates.KabulEdildi)
                                         {
                                             <tr>
                                                 <th scope="row">@i</th>
@@ -150,7 +150,7 @@
                                 <tbody>
                                     @for (int i = 1; i <= Model.Count(); i++)
                                     {
-                                        @if (Model[i - 1].FailureState == FailureStates.OdemeBekleniyor)
+                                        @if (Model[i - 1].FailureState == FailureStates.YolaCikildi)
                                         {
                                             <tr>
                                                 <th scope="row">@i</th>
@@ -163,6 +163,39 @@
                                         }
                                     }
 
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--Tab5-->
+                        <div id="menu5" class="container tab-pane fade">
+                            <br>
+                            <h3>Tamamlanmış Arızalar</h3>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Arıza Adı</th>
+                                        <th>Arıza Açıklama</th>
+                                        <th>Adres</th>
+                                        <th>Oluşturulma Tarihi</th>
+                                        <th>Teknisyen Adı</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 1; i <= Model.Count(); i++)
+                                    {
+                                        @if (Model[i - 1].FailureState == FailureStates.OdemeBekleniyor)
+                                        {
+                                            <tr>
+                                                <th scope="row">@i</th>
+                                                <td>@Model[i - 1].FailureName</td>
+                                                <td>@Model[i - 1].FailureDescription</td>
+                                                <td>@Model[i - 1].AddressDetail</td>
+                                                <td>@Model[i - 1].CreatedDate</td>
+                                                <td>@Model[i - 1].TechnicianName</td>
+                                            </tr>
+                                        }
+                                    }
                                 </tbody>
                             </table>
                         </div>
