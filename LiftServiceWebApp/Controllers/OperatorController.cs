@@ -45,7 +45,7 @@ namespace LiftServiceWebApp.Controllers
             return View(failures);
         }
 
-        // Teknisyen Atama ve Atanan Arızaları Görüntüleme
+        // Teknisyen Atama 
         [HttpPost]
         public async Task<IActionResult> FailureAssign(string technicianId, string failureId)
         {
@@ -59,7 +59,7 @@ namespace LiftServiceWebApp.Controllers
             _dbContext.SaveChanges();
             return RedirectToAction("GetFailure", "Operator");
         }
-
+        // Atanan Arızaları Görüntüleme
         public async Task<IActionResult> GetFailure()
         {
             var failures = _dbContext.Failures.ToList();
