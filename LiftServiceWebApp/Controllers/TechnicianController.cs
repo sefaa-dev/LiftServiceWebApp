@@ -1,5 +1,6 @@
 ﻿using LiftServiceWebApp.Data;
 using LiftServiceWebApp.Extensions;
+using LiftServiceWebApp.Models.Entities;
 using LiftServiceWebApp.Models.Identity;
 using LiftServiceWebApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -30,22 +31,33 @@ namespace LiftServiceWebApp.Controllers
         public async Task<IActionResult> GetFailures()
         {
             var technician = await _userManager.FindByIdAsync(HttpContext.GetUserId());
+            var failures = _dbContext.Failures.Where(x => x.TechnicianId == technician.Id && (x.FailureState == FailureStates.Yonlendirildi || x.FailureState == FailureStates.KabulEdildi)).ToList();
+            return View(failures);
+        }      
+        [HttpPost]
+        public async Task<IActionResult> GetFailures(string failureId)
+        {
+            var failure = _dbContext.Failures.Where(x => x.Id.ToString() == failureId).SingleOrDefault();
+            failure.FailureState = FailureStates.KabulEdildi;
+            _dbContext.Update(failure);
+            _dbContext.SaveChanges();
 
-            var failures = _dbContext.Failures.Where(x => x.TechnicianId == technician.Id).ToList();
+            var technician = await _userManager.FindByIdAsync(HttpContext.GetUserId());
+            var failures = _dbContext.Failures.Where(x => x.TechnicianId == technician.Id && (x.FailureState == FailureStates.Yonlendirildi || x.FailureState == FailureStates.KabulEdildi)).ToList();
+            return View(failures);
+        }
+        [HttpPost]
+        public IActionResult Payment(string userId)
+        {
+            
+            if (true)
+            {
 
-            List<TechnicianAssignViewModel> technicianAssignViewModel = new      List<TechnicianAssignViewModel>();
-
-           
-
-
-
-
-
-
-
-
+            }
 
             return View();
         }
+
+        
     }
 }

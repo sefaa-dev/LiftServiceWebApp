@@ -1,11 +1,6 @@
 ﻿@{ ViewBag.Title = "Arızalar";}
-@model List<FailureViewModel>
+@model List<Failure>
 
-<Style>
-    ss_two_sec:hover {
-  background-color: yellow;
-}
-</Style>
 <div class="container-fluid ss_service_one ss_section_sec_bg spacer_top spacer_bottom ss_two">
     <div class="row">
 
@@ -18,130 +13,51 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">Arıza Adı</th>
+                            <th scope="col">Arıza Detay</th>
+                            <th scope="col">Adres</th>
+                            <th scope="col">Oluşturulma Tarihi</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>twitter</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>twitter</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>twitter</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>twitter</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>twitter</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>twitter</td>
-                        </tr>
+                        @for (int i = 1; i <= Model.Count(); i++)
+                        {
+                            <tr>
+                                <th scope="row">@i</th>
+                                <td>@Model[i-1].FailureName</td>
+                                <td>@Model[i-1].FailureDescription</td>
+                                <td>@Model[i-1].AddressDetail</td>
+                                <td>@Model[i-1].CreatedDate</td>
+                                <td>
+                                    @{
+                                        if (i == 1)
+                                        {
+                                            if (Model[0].FailureState == FailureStates.KabulEdildi)
+                                            { 
+                                                                        <form method="post" asp-action="Payment" asp-controller="Technician">
+                                                                            <input type="hidden" asp-for="@Model[0].UserId" name="userId" />
+                                                                            <button class="btn btn-danger">ÜCRETLENDİR</button>
+                                                                        </form>
+                                            }
+                                            else
+                                            {
+                                                <form method="post" asp-action="GetFailures" asp-controller="Technician" >
+                                                    <input type="hidden" asp-for="@Model[0].Id" name="failureId"/>
+                                                    <button class="btn btn-outline-primary">KABUL ET</button>
+                                                </form>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <h6>Sırada Bekliyor</h6>
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
-
-
-
-
-
-
-
-
             </div>
         </div>
     </div>

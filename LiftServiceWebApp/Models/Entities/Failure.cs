@@ -21,7 +21,6 @@ namespace LiftServiceWebApp.Models.Entities
         Alındı,
         Yonlendirildi,
         KabulEdildi,
-        YolaCikildi,
         OdemeBekleniyor,
         Sonuclandi
     }
