@@ -60,7 +60,7 @@ namespace LiftServiceWebApp.Controllers
             return RedirectToAction("GetFailure", "Operator");
         }
         // Atanan Arızaları Görüntüleme
-        public async Task<IActionResult> GetFailure()
+        public async Task<IActionResult> GetFailures()
         {
             var failures = _dbContext.Failures.ToList();
             List<AssignedFailureViewModel> assignedFailureViewModels = new List<AssignedFailureViewModel>();

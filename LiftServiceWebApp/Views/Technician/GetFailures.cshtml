@@ -1,6 +1,12 @@
 ﻿@{ ViewBag.Title = "Arızalar";}
 @model List<Failure>
 
+    <Style>
+        .ss_two_sec:after{
+            background: white;
+        }
+    </Style>
+
 <div class="container-fluid ss_service_one ss_section_sec_bg spacer_top spacer_bottom ss_two">
     <div class="row">
 
@@ -25,25 +31,25 @@
                         {
                             <tr>
                                 <th scope="row">@i</th>
-                                <td>@Model[i-1].FailureName</td>
-                                <td>@Model[i-1].FailureDescription</td>
-                                <td>@Model[i-1].AddressDetail</td>
-                                <td>@Model[i-1].CreatedDate</td>
+                                <td>@Model[i - 1].FailureName</td>
+                                <td>@Model[i - 1].FailureDescription</td>
+                                <td>@Model[i - 1].AddressDetail</td>
+                                <td>@Model[i - 1].CreatedDate</td>
                                 <td>
                                     @{
                                         if (i == 1)
                                         {
                                             if (Model[0].FailureState == FailureStates.KabulEdildi)
-                                            { 
-                                                                        <form method="post" asp-action="Payment" asp-controller="Technician">
-                                                                            <input type="hidden" asp-for="@Model[0].UserId" name="userId" />
-                                                                            <button class="btn btn-danger">ÜCRETLENDİR</button>
-                                                                        </form>
+                                            {
+                                                <form method="post" asp-action="Payment" asp-controller="Technician">
+                                                    <input type="hidden" asp-for="@Model[0].UserId" name="userId" />
+                                                    <button class="btn btn-outline-primary">ÜCRETLENDİR</button>
+                                                </form>
                                             }
                                             else
                                             {
-                                                <form method="post" asp-action="GetFailures" asp-controller="Technician" >
-                                                    <input type="hidden" asp-for="@Model[0].Id" name="failureId"/>
+                                                <form method="post" asp-action="GetFailures" asp-controller="Technician">
+                                                    <input type="hidden" asp-for="@Model[0].Id" name="failureId" />
                                                     <button class="btn btn-outline-primary">KABUL ET</button>
                                                 </form>
                                             }

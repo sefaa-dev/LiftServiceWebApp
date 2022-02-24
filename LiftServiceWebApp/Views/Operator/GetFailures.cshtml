@@ -147,23 +147,6 @@
                                         <th>Teknisyen Adı</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @for (int i = 1; i <= Model.Count(); i++)
-                                    {
-                                        @if (Model[i - 1].FailureState == FailureStates.YolaCikildi)
-                                        {
-                                            <tr>
-                                                <th scope="row">@i</th>
-                                                <td>@Model[i - 1].FailureName</td>
-                                                <td>@Model[i - 1].FailureDescription</td>
-                                                <td>@Model[i - 1].AddressDetail</td>
-                                                <td>@Model[i - 1].CreatedDate</td>
-                                                <td>@Model[i - 1].TechnicianName</td>
-                                            </tr>
-                                        }
-                                    }
-
-                                </tbody>
                             </table>
                         </div>
                         <!--Tab5-->
