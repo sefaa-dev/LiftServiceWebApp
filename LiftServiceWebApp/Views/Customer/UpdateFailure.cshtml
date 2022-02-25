@@ -22,8 +22,8 @@
             <div asp-validation-summary="All" class="text-danger"></div>
         </div>
         <form asp-action="UpdateFailure" method="post">
-            <input type="hidden" id="lng" name="lng" />
-            <input type="hidden" id="lat" name="lat" />
+            <input asp-for="@Model.Longitude" type="hidden" id="lng" name="lng" />
+            <input asp-for="@Model.Latitude" type="hidden" id="lat" name="lat" />
             <div class="row">
                 <div class="col-lg-6">
                     <div class="col-lg-12" id="map">
@@ -82,5 +82,26 @@
 
 @section Scripts{
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_a4OS5hL9_7MO-qrcwx0_9g_UAmOgLKE"></script>
+
+    <script>
+
+        $(() => {
+            var lat = document.getElementById("lat");
+            console.log("burda");
+            console.log(lat.value);
+            //lat=parseFloat(lat.value);
+
+            var lng = document.getElementById("lng");
+            console.log(lng.value);
+            //lng=parseFloat(lat.value);
+
+            var position = {
+                lat: lat.value,
+                lng: lng.value
+            };
+            konumBul(position);
+        })
+
+    </script>
     <script src="~/user-assets/js/harita.js"></script>
 }

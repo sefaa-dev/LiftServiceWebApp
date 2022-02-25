@@ -16,6 +16,8 @@ namespace LiftServiceWebApp.ViewModels
         public string FailureDescription { get; set; }
 
         public FailureStates FailureState { get; set; }
+
+        
         public string Latitude { get; set; }//Enlem
         public string Longitude { get; set; }//Boylam
 
