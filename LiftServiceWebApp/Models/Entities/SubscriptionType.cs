@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using LiftServiceWebApp.Models.Abstracts;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace LiftServiceWebApp.Models.Entities
 {
-    public class SubscriptionType : BaseEntity
+    public class SubscriptionType : BaseEntity<Guid>
     {
         [Required, StringLength(50)]
         public string Name { get; set; }
