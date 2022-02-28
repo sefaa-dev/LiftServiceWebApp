@@ -18,7 +18,7 @@ namespace LiftServiceWebApp.Controllers
         private readonly FailureRepo _failureRepo;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public CustomerController(FailureRepo failureRepo, 
+        public CustomerController(FailureRepo failureRepo,
             UserManager<ApplicationUser> userManager)
         {
             _failureRepo = failureRepo;
@@ -58,6 +58,28 @@ namespace LiftServiceWebApp.Controllers
             return View();
         }
 
+        public async Task<IActionResult> GetFailures()
+        {
+            var failures = _failureRepo.Get().ToList();
+            List<AssignedFailureViewModel> assignedFailureViewModels = new List<AssignedFailureViewModel>();
+            foreach (var item in failures)
+            {
+                var technician = await _userManager.FindByIdAsync(item.TechnicianId);
+                string technicianName;
+                if (technician == null)
+                    technicianName = null;
+                else
+                    technicianName = $"{ technician.Name.ToUpper() } { technician.Surname.ToUpper() }";
+                assignedFailureViewModels.Add(new AssignedFailureViewModel
+                {
+                    FailureName = item.FailureName,
+                    FailureDescription = item.FailureDescription,
+                    FailureState = item.FailureState,
+                    TechnicianName = technicianName
+                });
+            }
+            return View(assignedFailureViewModels);
+        }
         //[HttpGet]
         //public IActionResult UpdateFailure(Guid id)
         //{

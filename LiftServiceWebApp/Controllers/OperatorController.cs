@@ -54,6 +54,7 @@ namespace LiftServiceWebApp.Controllers
         {
             var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
             var failure = _failureRepo.GetById(Guid.Parse(failureId));
+            var technician = await _userManager.FindByIdAsync(technicianId);
 
             failure.TechnicianId = technicianId;
             failure.FailureState = FailureStates.Yonlendirildi;
@@ -73,7 +74,7 @@ namespace LiftServiceWebApp.Controllers
                 var technician = await _userManager.FindByIdAsync(item.TechnicianId);
                 string technicianName;
                 if (technician == null)
-                    technicianName = null;
+                    technicianName = "Henüz teknisyen atanmadı";
                 else
                     technicianName = $"{ technician.Name } {technician.Surname}";
                 assignedFailureViewModels.Add(new AssignedFailureViewModel
