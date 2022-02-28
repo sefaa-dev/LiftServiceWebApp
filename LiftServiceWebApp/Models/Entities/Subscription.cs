@@ -1,4 +1,5 @@
-﻿using LiftServiceWebApp.Models.Identity;
+﻿using LiftServiceWebApp.Models.Abstracts;
+using LiftServiceWebApp.Models.Identity;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,14 +7,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace LiftServiceWebApp.Models.Entities
 
 {
-    public class Subscription : BaseEntity
+    public class Subscription : BaseEntity<Guid>
     {
         public Guid SubscriptionTypeId { get; set; }
         public decimal Amount { get; set; }
         public decimal PaidAmount { get; set; }
         public DateTime EndDate { get; set; }
         [StringLength(450)]
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
         [NotMapped]
         public bool IsActive => EndDate > DateTime.Now;
 
