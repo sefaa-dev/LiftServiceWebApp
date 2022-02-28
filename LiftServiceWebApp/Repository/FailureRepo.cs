@@ -14,10 +14,6 @@ namespace LiftServiceWebApp.Repository
         {
 
         }
-        public IQueryable<Failure> GetAll()
-        {
-            return Table;
-        }
         public IQueryable<Failure> GetByTechnicianId(string id)
         {
             return Table.Where(x => x.TechnicianId == id && (x.FailureState == FailureStates.Yonlendirildi || x.FailureState == FailureStates.KabulEdildi));

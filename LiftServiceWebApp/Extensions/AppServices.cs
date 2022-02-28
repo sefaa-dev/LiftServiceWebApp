@@ -1,4 +1,5 @@
 ﻿using LiftServiceWebApp.MapperProfiles;
+using LiftServiceWebApp.Repository;
 using LiftServiceWebApp.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +16,7 @@ namespace LiftServiceWebApp.Extensions
                 options.AddProfile(typeof(AccountProfile));
                 options.AddProfile(typeof(PaymentProfile));
             });
-
+            services.AddScoped<FailureRepo>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<IPaymentService, IyzicoPaymentService>();    
             //loose coupling

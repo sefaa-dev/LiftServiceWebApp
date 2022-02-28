@@ -26,7 +26,7 @@ namespace LiftServiceWebApp.Repository.Abstracts
         public TKey Insert(TEntity entity, bool isSaveLater = false)
         {
             Table.Add(entity);
-            if (isSaveLater)
+            if (!isSaveLater)
                 Save();
             return entity.Id;
         }

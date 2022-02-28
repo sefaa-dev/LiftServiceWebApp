@@ -66,7 +66,7 @@ namespace LiftServiceWebApp.Controllers
         // Atanan Arızaları Görüntüleme
         public async Task<IActionResult> GetFailures()
         {
-            var failures = _failureRepo.GetAll().ToList();
+            var failures = _failureRepo.Get().ToList();
             List<AssignedFailureViewModel> assignedFailureViewModels = new List<AssignedFailureViewModel>();
             foreach (var item in failures)
             {
