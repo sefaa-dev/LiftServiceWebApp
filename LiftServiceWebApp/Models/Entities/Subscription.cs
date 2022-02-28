@@ -9,12 +9,12 @@ namespace LiftServiceWebApp.Models.Entities
 {
     public class Subscription : BaseEntity<Guid>
     {
-        public Guid SubscriptionTypeId { get; set; }
+        public string SubscriptionTypeId { get; set; }
         public decimal Amount { get; set; }
         public decimal PaidAmount { get; set; }
         public DateTime EndDate { get; set; }
         [StringLength(450)]
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         [NotMapped]
         public bool IsActive => EndDate > DateTime.Now;
 

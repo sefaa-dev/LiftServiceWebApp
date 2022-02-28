@@ -37,28 +37,21 @@ namespace LiftServiceWebApp.Controllers
             return View(failures);
         }      
         [HttpPost]
-        public async Task<IActionResult> GetFailures(Guid failureId)
+        public async Task<IActionResult> GetFailures(string failureId)
         {
-            var failure = _failureRepo.GetById(failureId);
+            var failure = _failureRepo.GetById(Guid.Parse(failureId));
      
             failure.FailureState = FailureStates.KabulEdildi;
             _failureRepo.Update(failure);
 
-
-         //YARIM KALDI//
-
             var technician = await _userManager.FindByIdAsync(HttpContext.GetUserId());
-            var failures = _dbContext.Failures.Where(x => x.TechnicianId == technician.Id && (x.FailureState == FailureStates.Yonlendirildi || x.FailureState == FailureStates.KabulEdildi)).ToList();
+            var failures = _failureRepo.GetByTechnicianId(technician.Id).ToList();
             return View(failures);
         }
         [HttpPost]
         public IActionResult Payment(string userId)
         {
             
-            if (true)
-            {
-
-            }
 
             return View();
         }

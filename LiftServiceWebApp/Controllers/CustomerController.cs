@@ -2,6 +2,7 @@
 using LiftServiceWebApp.Extensions;
 using LiftServiceWebApp.Models.Entities;
 using LiftServiceWebApp.Models.Identity;
+using LiftServiceWebApp.Repository;
 using LiftServiceWebApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,12 +15,13 @@ namespace LiftServiceWebApp.Controllers
 {
     public class CustomerController : Controller
     {
-        private readonly MyContext _dbContext;
+        private readonly FailureRepo _failureRepo;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public CustomerController(MyContext dbContext, UserManager<ApplicationUser> userManager)
+        public CustomerController(FailureRepo failureRepo, 
+            UserManager<ApplicationUser> userManager)
         {
-            _dbContext = dbContext;
+            _failureRepo = failureRepo;
             _userManager = userManager;
         }
         public IActionResult Index()
@@ -31,7 +33,6 @@ namespace LiftServiceWebApp.Controllers
         {
             return View();
         }
-
 
         [HttpPost]
         public async Task<IActionResult> CreateFailure(string lat, string lng, Failure model)
@@ -53,8 +54,7 @@ namespace LiftServiceWebApp.Controllers
             model.Latitude = lat;
             model.Longitude = lng;
 
-            _dbContext.Failures.Add(model);
-            _dbContext.SaveChanges();
+            _failureRepo.Insert(model);
             return View();
         }
 

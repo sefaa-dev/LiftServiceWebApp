@@ -46,12 +46,9 @@ namespace LiftServiceWebApp.Repository.Abstracts
             Table.Update(entity);
             return isSaveLater ? 0 : Save();
         }
-
         public int Save()
         {
             return Context.SaveChanges();
         }
-
-
     }
 }

@@ -2,6 +2,7 @@
 using LiftServiceWebApp.Extensions;
 using LiftServiceWebApp.Models.Entities;
 using LiftServiceWebApp.Models.Identity;
+using LiftServiceWebApp.Repository;
 using LiftServiceWebApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,12 +15,14 @@ namespace LiftServiceWebApp.Controllers
 {
     public class OperatorController : Controller
     {
-        private readonly MyContext _dbContext;
+        private readonly FailureRepo _failureRepo;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public OperatorController(MyContext dbContext, UserManager<ApplicationUser> userManager)
+        public OperatorController(FailureRepo failureRepo, 
+            MyContext dbContext, 
+            UserManager<ApplicationUser> userManager)
         {
-            _dbContext = dbContext;
+            _failureRepo = failureRepo;
             _userManager = userManager;
         }
         // Atanmayan Arızaları Görüntüleme
@@ -27,7 +30,7 @@ namespace LiftServiceWebApp.Controllers
         {
             // Arızalar
             var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
-            var failures = _dbContext.Failures.Where(x => x.TechnicianId == null).ToList();
+            var failures = _failureRepo.GetNotAssigned().ToList();
 
             // Teknisyenler
             var technicians = await _userManager.GetUsersInRoleAsync("Technician");
@@ -50,19 +53,20 @@ namespace LiftServiceWebApp.Controllers
         public async Task<IActionResult> FailureAssign(string technicianId, string failureId)
         {
             var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
-            var failure = _dbContext.Failures.Where(x => x.Id.ToString() == failureId).SingleOrDefault();
+            var failure = _failureRepo.GetById(Guid.Parse(failureId));
+
             failure.TechnicianId = technicianId;
             failure.FailureState = FailureStates.Yonlendirildi;
             failure.UpdatedUser = user.UserName;
             failure.UpdatedDate = DateTime.Now;
-            _dbContext.Update(failure);
-            _dbContext.SaveChanges();
+
+            _failureRepo.Update(failure);
             return RedirectToAction("GetFailure", "Operator");
         }
         // Atanan Arızaları Görüntüleme
         public async Task<IActionResult> GetFailures()
         {
-            var failures = _dbContext.Failures.ToList();
+            var failures = _failureRepo.GetAll().ToList();
             List<AssignedFailureViewModel> assignedFailureViewModels = new List<AssignedFailureViewModel>();
             foreach (var item in failures)
             {

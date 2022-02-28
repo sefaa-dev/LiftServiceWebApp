@@ -13,8 +13,8 @@ namespace LiftServiceWebApp.Models.Entities
         public string Longitude { get; set; }//Boylam
         public string AddressDetail { get; set; }
         public FailureStates FailureState { get; set; }
-        public Guid TechnicianId { get; set; }
-        public Guid UserId { get; set; }
+        public string TechnicianId { get; set; }
+        public string UserId { get; set; }
         [ForeignKey(nameof(UserId))]
         public virtual ApplicationUser ApplicationUser { get; set; }
     }

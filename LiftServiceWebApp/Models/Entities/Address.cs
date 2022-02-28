@@ -14,7 +14,7 @@ namespace LiftServiceWebApp.Models.Entities
         public AddressTypes AddressType { get; set; }
 
         [StringLength(450)]
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         [ForeignKey(nameof(UserId))]
         public virtual ApplicationUser User { get; set; }
     }
