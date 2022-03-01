@@ -88,16 +88,18 @@
             var lat = document.getElementById("lat");
             console.log(lat.value);
             //lat=parseFloat(lat.value);
-
             var lng = document.getElementById("lng");
             console.log(lng.value);
             //lng=parseFloat(lat.value);
-
             var position = {
                 lat: lat.value,
                 lng: lng.value
             };
-            konumBul(position);
+            if (position.lat == '' || position.lng == '') {
+                konumBul(null);
+            } else {
+                konumBul(position);
+            }
         })
 
     </script>

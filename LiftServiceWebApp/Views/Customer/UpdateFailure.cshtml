@@ -84,24 +84,14 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_a4OS5hL9_7MO-qrcwx0_9g_UAmOgLKE"></script>
 
     <script>
-
-        $(() => {
-            var lat = document.getElementById("lat");
-            console.log("burda");
-            console.log(lat.value);
-            //lat=parseFloat(lat.value);
-
-            var lng = document.getElementById("lng");
-            console.log(lng.value);
-            //lng=parseFloat(lat.value);
-
-            var position = {
-                lat: lat.value,
-                lng: lng.value
-            };
-            konumBul(position);
-        })
-
+    $(()=>{
+    
+      var position = {
+          lat :@Model.Latitude,
+          lng: @Model.Longitude
+      };
+        konumBul(position);
+    })
     </script>
     <script src="~/user-assets/js/harita.js"></script>
 }
