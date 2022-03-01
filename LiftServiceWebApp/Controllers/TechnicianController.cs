@@ -48,11 +48,11 @@ namespace LiftServiceWebApp.Controllers
             var failures = _failureRepo.GetByTechnicianId(technician.Id).ToList();
             return View(failures);
         }
+
         [HttpPost]
-        public IActionResult Payment(string userId)
+        public IActionResult Payment(PaymentIdViewModel paymentIdViewModel)
         {
             
-
             return View();
         }
 

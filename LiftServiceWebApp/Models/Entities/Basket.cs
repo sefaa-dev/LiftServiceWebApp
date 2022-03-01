@@ -1,11 +1,7 @@
 ﻿using LiftServiceWebApp.Models.Abstracts;
 using LiftServiceWebApp.Models.Identity;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LiftServiceWebApp.Models.Entities
 {
@@ -22,8 +18,8 @@ namespace LiftServiceWebApp.Models.Entities
         public Guid ProductId { get; set; }
         [ForeignKey(nameof(ProductId))]
         public virtual Product Product { get; set; }
-        public string OrderStatue { get; set; }
-        public string Price { get; set; }
+        public OrderStatus OrderStatue { get; set; }
+        public decimal Price { get; set; }
 
         public enum OrderStatus
         {

@@ -1,11 +1,11 @@
 ﻿@{ ViewBag.Title = "Arızalar";}
 @model List<Failure>
 
-    <Style>
-        .ss_two_sec:after{
-            background: white;
-        }
-    </Style>
+<Style>
+    .ss_two_sec:after {
+        background: white;
+    }
+</Style>
 
 <div class="container-fluid ss_service_one ss_section_sec_bg spacer_top spacer_bottom ss_two">
     <div class="row">
@@ -42,7 +42,9 @@
                                             if (Model[0].FailureState == FailureStates.KabulEdildi)
                                             {
                                                 <form method="post" asp-action="Payment" asp-controller="Technician">
-                                                    <input type="hidden" asp-for="@Model[0].UserId" name="userId" />
+                                                    <input type="hidden" asp-for="@Model[0].UserId" name="UserId" />
+                                                    <input type="hidden" asp-for="@Model[0].TechnicianId" name="TechnicianId" />
+                                                    <input type="hidden" asp-for="@Model[0].Id" name="FailureId"/>
                                                     <button class="btn btn-outline-primary">ÜCRETLENDİR</button>
                                                 </form>
                                             }
