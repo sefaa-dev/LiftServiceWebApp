@@ -29,8 +29,8 @@ function konumBul() {
                             position: e["latLng"],
                             title: "Hello World!"
                         });
-                        marker.setMap(map);
-                        console.log(marker.getPosition().lat());
+                        
+
                     }
                     else {
                         marker.setMap(null);
@@ -38,17 +38,14 @@ function konumBul() {
                             position: e["latLng"],
                             title: "Hello World!"
                         });
-                        marker.setMap(map);
-                        console.log(marker.getPosition().lat());
-                        console.log(marker.getPosition().lng());
-                        document.getElementById("lat").value = marker.getPosition().lat();
-                        document.getElementById("lng").value = marker.getPosition().lng();
-
                     }
-                });
-                
-                /*console.log(marker.getPosition().lat());*/
+                    marker.setMap(map);
 
+                    document.getElementById("lat").value = marker.getPosition().lat();
+                    document.getElementById("lng").value = marker.getPosition().lng();
+                    console.log("lat", marker.getPosition().lat());
+                    console.log("lng", marker.getPosition().lng());
+                });
             });
 
         }, function (error) {

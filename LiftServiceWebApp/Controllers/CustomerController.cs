@@ -1,4 +1,5 @@
-﻿using LiftServiceWebApp.Data;
+﻿using AutoMapper;
+using LiftServiceWebApp.Data;
 using LiftServiceWebApp.Extensions;
 using LiftServiceWebApp.Models.Entities;
 using LiftServiceWebApp.Models.Identity;
@@ -7,8 +8,6 @@ using LiftServiceWebApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace LiftServiceWebApp.Controllers
@@ -17,12 +16,15 @@ namespace LiftServiceWebApp.Controllers
     {
         private readonly FailureRepo _failureRepo;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IMapper _mapper;
 
         public CustomerController(FailureRepo failureRepo,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IMapper mapper)
         {
             _failureRepo = failureRepo;
             _userManager = userManager;
+            _mapper = mapper;
         }
         public IActionResult Index()
         {
@@ -57,7 +59,45 @@ namespace LiftServiceWebApp.Controllers
             _failureRepo.Insert(model);
             return View();
         }
+        [HttpGet]
+        public IActionResult UpdateFailure(Guid id)
+        {
+            var failure = _dbContext.Failures.Find(id);
+            if (failure == null)
+            {
 
+            }
+            FailureViewModel VMFailure = _mapper.Map<FailureViewModel>(failure);
+                return View(VMFailure);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateFailure(string lat, string lng, Failure model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            Failure failure = _dbContext.Failures.Find(model.Id);
+            failure.FailureName = model.FailureName;
+            failure.FailureDescription = model.FailureDescription;
+            failure.AddressDetail = model.AddressDetail;
+            failure.UpdatedDate = DateTime.Now;
+            failure.Latitude = lat;
+            failure.Longitude = lng;
+
+            _dbContext.SaveChanges();
+            return RedirectToAction("Failures");
+        }
+        public IActionResult DeleteFailure(Guid id)
+        {
+            var failure = _dbContext.Failures.Find(id);
+            if (failure == null)
+            {
+
+            }
+            
         public async Task<IActionResult> GetFailures()
         {
             var failures = _failureRepo.Get().ToList();
@@ -80,49 +120,5 @@ namespace LiftServiceWebApp.Controllers
             }
             return View(assignedFailureViewModels);
         }
-        //[HttpGet]
-        //public IActionResult UpdateFailure(Guid id)
-        //{
-        //    var failure = _dbContext.Failures.Find(id);
-        //    if (failure == null)
-        //    {
-
-        //    }
-
-        //    return View(failure);
-        //}
-
-        //[HttpPost]
-        //public IActionResult UpdateFailure(string lat, string lng, Failure model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model);
-        //    }
-
-        //    Failure failure = _dbContext.Failures.Find(model.Id);
-        //    failure.FailureName = model.FailureName;
-        //    failure.FailureDescription = model.FailureDescription;
-        //    failure.AddressDetail = model.AddressDetail;
-        //    failure.UpdatedDate = DateTime.Now;
-        //    failure.Latitude = lat;
-        //    failure.Longitude = lng;
-
-        //    _dbContext.SaveChanges();
-        //    return RedirectToAction("GetFailures");
-        //}
-        //public IActionResult DeleteIssue(Guid id)
-        //{
-        //    var issue = _dbContext.Failures.Find(id);
-        //    if (issue == null)
-        //    {
-
-        //    }
-
-        //    _dbContext.Remove(issue);
-        //    _dbContext.SaveChanges();
-
-        //    return RedirectToAction("GetIssues");
-        //}
     }
 }
