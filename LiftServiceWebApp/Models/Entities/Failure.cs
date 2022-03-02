@@ -1,9 +1,11 @@
-﻿using LiftServiceWebApp.Models.Identity;
+﻿using LiftServiceWebApp.Models.Abstracts;
+using LiftServiceWebApp.Models.Identity;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LiftServiceWebApp.Models.Entities
 {
-    public class Failure:BaseEntity
+    public class Failure:BaseEntity<Guid>
     {
         public string FailureName { get; set; }
         public string FailureDescription { get; set; }
@@ -19,8 +21,8 @@ namespace LiftServiceWebApp.Models.Entities
     public enum FailureStates
     {
         Alındı,
-        Adreste,
-        TeknisyenAtandı,
+        Yonlendirildi,
+        KabulEdildi,
         OdemeBekleniyor,
         Sonuclandi
     }

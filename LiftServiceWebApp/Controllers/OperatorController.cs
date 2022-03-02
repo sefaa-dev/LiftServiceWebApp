@@ -2,6 +2,7 @@
 using LiftServiceWebApp.Extensions;
 using LiftServiceWebApp.Models.Entities;
 using LiftServiceWebApp.Models.Identity;
+using LiftServiceWebApp.Repository;
 using LiftServiceWebApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,57 +15,81 @@ namespace LiftServiceWebApp.Controllers
 {
     public class OperatorController : Controller
     {
-        private readonly MyContext _dbContext;
+        private readonly FailureRepo _failureRepo;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public OperatorController(MyContext dbContext, UserManager<ApplicationUser> userManager)
+        public OperatorController(FailureRepo failureRepo, 
+            MyContext dbContext, 
+            UserManager<ApplicationUser> userManager)
         {
-            _dbContext = dbContext;
+            _failureRepo = failureRepo;
             _userManager = userManager;
         }
-        public async Task<IActionResult> IssueAssign()
+        // Atanmayan Arızaları Görüntüleme
+        public async Task<IActionResult> FailureAssign()
         {
-
-            
+            // Arızalar
             var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
-            var failures = _dbContext.Failures.Where(x => x.UserId == user.Id).ToList();
-            List<IssueAssignViewModel> issueAssignViewModels = new List<IssueAssignViewModel>();
-            foreach(Failure item in failures)
+            var failures = _failureRepo.GetNotAssigned().ToList();
+
+            // Teknisyenler
+            var technicians = await _userManager.GetUsersInRoleAsync("Technician");
+            List<TechnicianAssignViewModel> technicianList = new List<TechnicianAssignViewModel>();
+            foreach (var item in technicians)
             {
-                
-                
-                ApplicationUser Technician = await _userManager.FindByIdAsync(item.TechnicianId);
-                
-                var issueAssignViewModel = new IssueAssignViewModel()
+                TechnicianAssignViewModel technicianAssignViewModel = new TechnicianAssignViewModel
                 {
-                    FailureName = item.FailureName,
-                    CreatedDate = item.CreatedDate,
-                    FailureState = FailureStates.Alındı
+                    TechnicianId = item.Id,
+                    TechnicianName = $"{item.Name} {item.Surname}"
                 };
-                // Teknisyen null gelince Technician.Name ve Technician.Surname null reference hatası veriyor
-                // Bunu engellemek için if else yazıldı
-                if (Technician == null)
-                {
-                    issueAssignViewModel.TechnicianName = null;
-                }
-                else
-                {
-                    issueAssignViewModel.TechnicianName = $"{Technician.Name} {Technician.Surname}";
-                }
-                issueAssignViewModels.Add(issueAssignViewModel);
+                technicianList.Add(technicianAssignViewModel);
             }
-            return View(issueAssignViewModels);
+            ViewBag.Technicians = technicianList;
+            return View(failures);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> IssueAssignAsync(string FailureId)
-        //{
+        // Teknisyen Atama 
+        [HttpPost]
+        public async Task<IActionResult> FailureAssign(string technicianId, string failureId)
+        {
+            var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
+            var failure = _failureRepo.GetById(Guid.Parse(failureId));
+            var technician = await _userManager.FindByIdAsync(technicianId);
 
-        //    var failure = await _dbContext.Failures.FindAsync(FailureId);
-        //    failure.FailureState = FailureStates.TeknisyenAtandı;
-        //}
+            failure.TechnicianId = technicianId;
+            failure.FailureState = FailureStates.Yonlendirildi;
+            failure.UpdatedUser = user.UserName;
+            failure.UpdatedDate = DateTime.Now;
 
-
-
+            _failureRepo.Update(failure);
+            return RedirectToAction("GetFailure", "Operator");
+        }
+        // Atanan Arızaları Görüntüleme
+        public async Task<IActionResult> GetFailures()
+        {
+            var failures = _failureRepo.Get().ToList();
+            List<AssignedFailureViewModel> assignedFailureViewModels = new List<AssignedFailureViewModel>();
+            foreach (var item in failures)
+            {
+                var technician = await _userManager.FindByIdAsync(item.TechnicianId);
+                string technicianName;
+                if (technician == null)
+                    technicianName = "Henüz teknisyen atanmadı";
+                else
+                    technicianName = $"{ technician.Name } {technician.Surname}";
+                assignedFailureViewModels.Add(new AssignedFailureViewModel
+                {
+                    FailureName = item.FailureName,
+                    FailureDescription = item.FailureDescription,
+                    AddressDetail = item.AddressDetail,
+                    Latitude = item.Latitude,
+                    Longitude = item.Longitude,
+                    CreatedDate = item.CreatedDate,
+                    FailureState = item.FailureState,
+                    TechnicianName = technicianName
+                });
+            }
+            return View(assignedFailureViewModels);
+        }
     }
 }

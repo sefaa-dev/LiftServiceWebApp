@@ -3,6 +3,7 @@ using LiftServiceWebApp.Data;
 using LiftServiceWebApp.Extensions;
 using LiftServiceWebApp.Models.Entities;
 using LiftServiceWebApp.Models.Identity;
+using LiftServiceWebApp.Repository;
 using LiftServiceWebApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,15 +14,15 @@ namespace LiftServiceWebApp.Controllers
 {
     public class CustomerController : Controller
     {
-        private readonly MyContext _dbContext;
+        private readonly FailureRepo _failureRepo;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
 
-
-
-        public CustomerController(MyContext dbContext, UserManager<ApplicationUser> userManager, IMapper mapper)
+        public CustomerController(FailureRepo failureRepo,
+            UserManager<ApplicationUser> userManager,
+            IMapper mapper)
         {
-            _dbContext = dbContext;
+            _failureRepo = failureRepo;
             _userManager = userManager;
             _mapper = mapper;
         }
@@ -31,10 +32,6 @@ namespace LiftServiceWebApp.Controllers
         }
         [HttpGet]
         public IActionResult CreateFailure()
-        {
-            return View();
-        }
-        public IActionResult Failures()
         {
             return View();
         }
@@ -59,8 +56,7 @@ namespace LiftServiceWebApp.Controllers
             model.Latitude = lat;
             model.Longitude = lng;
 
-            _dbContext.Failures.Add(model);
-            _dbContext.SaveChanges();
+            _failureRepo.Insert(model);
             return View();
         }
         [HttpGet]
@@ -101,11 +97,28 @@ namespace LiftServiceWebApp.Controllers
             {
 
             }
-
-            _dbContext.Remove(failure);
-            _dbContext.SaveChanges();
-
-            return RedirectToAction("Failures");
+            
+        public async Task<IActionResult> GetFailures()
+        {
+            var failures = _failureRepo.Get().ToList();
+            List<AssignedFailureViewModel> assignedFailureViewModels = new List<AssignedFailureViewModel>();
+            foreach (var item in failures)
+            {
+                var technician = await _userManager.FindByIdAsync(item.TechnicianId);
+                string technicianName;
+                if (technician == null)
+                    technicianName = null;
+                else
+                    technicianName = $"{ technician.Name.ToUpper() } { technician.Surname.ToUpper() }";
+                assignedFailureViewModels.Add(new AssignedFailureViewModel
+                {
+                    FailureName = item.FailureName,
+                    FailureDescription = item.FailureDescription,
+                    FailureState = item.FailureState,
+                    TechnicianName = technicianName
+                });
+            }
+            return View(assignedFailureViewModels);
         }
     }
 }

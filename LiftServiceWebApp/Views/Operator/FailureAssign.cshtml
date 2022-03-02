@@ -1,0 +1,80 @@
+﻿@{ ViewBag.Title = "Arızalar";}
+@model List<Failure>
+
+<div class="container-fluid ss_service_one ss_section_sec_bg spacer_top spacer_bottom ss_two">
+    <div class="row">
+        <div class="container">
+            <div class="col-lg-12 col-md-6 col-sm-6">
+
+                <br />
+                <br />
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Arıza Adı</th>
+                            <th>Arıza Açıklama</th>
+                            <th>Adres</th>
+                            <th>Oluşturulma Tarihi</th>
+                            <th>Teknisyen Ata</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 1; i <= Model.Count(); i++)
+                        {
+                            <tr>
+                                <th scope="row">@i</th>
+                                <td>@Model[i - 1].FailureName</td>
+                                <td>@Model[i - 1].FailureDescription</td>
+                                <td>@Model[i - 1].AddressDetail</td>
+                                <td>@Model[i - 1].CreatedDate</td>
+                                <td>
+                                    <select class="form-select btn btn-info" asp-for="@Model[i-1].TechnicianId" id="technician" name="technician">
+                                        <option value="none" selected disabled hidden>Teknisyen Seçiniz</option>
+                                        @foreach (TechnicianAssignViewModel item in ViewBag.Technicians)
+                                        {
+                                            <option value="@item.TechnicianId">@item.TechnicianName</option>
+                                        }
+                                    </select>
+
+                                    <input type="hidden" id="failureId" name="failureId" value="@Model[i-1].Id" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+            <br />
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $('#technician').change(function () {
+            var technicianId = $('#technician').val();
+            var failureId = $('#failureId').val();
+            $.ajax({
+
+                url: "/operator/failureAssign",
+                type: "POST",
+                data:
+                {
+                    "technicianId": technicianId,
+                    "failureId": failureId
+                },
+                datatype: "json",
+                error: function (request, status, error) {
+                    console.log(request);
+                },
+                success: function (response) {
+                    console.log(response);
+                    alert("Teknisyen Atandı");
+                }
+            });
+        });
+    </script>
+}
