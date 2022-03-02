@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using LiftServiceWebApp.Data;
 using LiftServiceWebApp.Extensions;
 using LiftServiceWebApp.Models.Entities;
 using LiftServiceWebApp.Models.Identity;
@@ -8,6 +7,8 @@ using LiftServiceWebApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LiftServiceWebApp.Controllers
@@ -62,7 +63,7 @@ namespace LiftServiceWebApp.Controllers
         [HttpGet]
         public IActionResult UpdateFailure(Guid id)
         {
-            var failure = _dbContext.Failures.Find(id);
+            var failure = _failureRepo.GetById(id);
             if (failure == null)
             {
 
@@ -79,7 +80,7 @@ namespace LiftServiceWebApp.Controllers
                 return View(model);
             }
 
-            Failure failure = _dbContext.Failures.Find(model.Id);
+            Failure failure = _failureRepo.GetById(model.Id);
             failure.FailureName = model.FailureName;
             failure.FailureDescription = model.FailureDescription;
             failure.AddressDetail = model.AddressDetail;
@@ -87,16 +88,9 @@ namespace LiftServiceWebApp.Controllers
             failure.Latitude = lat;
             failure.Longitude = lng;
 
-            _dbContext.SaveChanges();
+            _failureRepo.Update(failure);
             return RedirectToAction("Failures");
         }
-        public IActionResult DeleteFailure(Guid id)
-        {
-            var failure = _dbContext.Failures.Find(id);
-            if (failure == null)
-            {
-
-            }
             
         public async Task<IActionResult> GetFailures()
         {
