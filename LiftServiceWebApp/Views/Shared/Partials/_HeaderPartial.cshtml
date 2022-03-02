@@ -121,7 +121,17 @@
                                         <span></span>
                                         <span></span>
                                     </div>
-                                    <a href="signup.html" class="white_btn">SignUp</a>
+                                    @if (signInManager.IsSignedIn(Context.User))
+                                    {
+                                        <a asp-controller="Account" asp-action="Logout" class="white_btn">Çıkış Yap</a>
+
+
+                                        @if (Context.User.IsInRole(RoleNames.Admin))
+                                        {
+                                            <a asp-area="Admin" asp-controller="Manage" asp-action="Index" class="white_btn">Admin Panel</a>} }
+                                    else
+                                    {
+                                        <a asp-controller="Account" asp-action="Login" class="white_btn">Giriş Yap</a>}
                                 </div>
                             </div>
                         </div>
