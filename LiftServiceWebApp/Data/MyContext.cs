@@ -34,6 +34,8 @@ namespace LiftServiceWebApp.Data
         }
 
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<Product> Products { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<SubscriptionType> SubscriptionTypes { get; set; }
         public DbSet<Failure> Failures { get; set; }

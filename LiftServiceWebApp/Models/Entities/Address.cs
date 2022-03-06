@@ -1,10 +1,12 @@
-﻿using LiftServiceWebApp.Models.Identity;
+﻿using LiftServiceWebApp.Models.Abstracts;
+using LiftServiceWebApp.Models.Identity;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LiftServiceWebApp.Models.Entities
 {
-    public class Address : BaseEntity
+    public class Address : BaseEntity<Guid>
     {
         public string ApartmentBuilding { get; set; }
         public string ApartmentNo { get; set; }

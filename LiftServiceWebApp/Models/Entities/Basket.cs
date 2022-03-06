@@ -1,4 +1,5 @@
-﻿using LiftServiceWebApp.Models.Identity;
+﻿using LiftServiceWebApp.Models.Abstracts;
+using LiftServiceWebApp.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;

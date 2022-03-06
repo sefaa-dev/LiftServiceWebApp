@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Arıza Kaydı Sayfası";
+    ViewData["Title"] = "Arıza Kaydı Güncelle";
 }
 @model FailureViewModel
 <Style>
@@ -14,12 +14,14 @@
     }
 </Style>
 
+
+
 <section class="ss_pv_one spacer_top">
     <div class="container-fluid">
         <div class="user-actions mb-40">
             <div asp-validation-summary="All" class="text-danger"></div>
         </div>
-        <form asp-action="CreateFailure" method="post">
+        <form asp-action="UpdateFailure" method="post">
             <input type="hidden" id="lng" name="lng" />
             <input type="hidden" id="lat" name="lat" />
             <div class="row">
@@ -35,7 +37,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="billing-details">
-                        <h3 class="title">Arıza Kaydı</h3>
+                        <h3 class="title">Arıza Kaydı Güncelle</h3>
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">

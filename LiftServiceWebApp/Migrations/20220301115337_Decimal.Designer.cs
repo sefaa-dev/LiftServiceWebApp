@@ -4,14 +4,16 @@ using LiftServiceWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LiftServiceWebApp.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20220301115337_Decimal")]
+    partial class Decimal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -604,21 +606,9 @@ namespace LiftServiceWebApp.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Basket", b =>
-                {
-                    b.Navigation("BasketProducts");
-                });
-
-            modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Product", b =>
-                {
-                    b.Navigation("BasketProducts");
-                });
-
             modelBuilder.Entity("LiftServiceWebApp.Models.Identity.ApplicationUser", b =>
                 {
                     b.Navigation("Addresses");
-
-                    b.Navigation("Baskets");
 
                     b.Navigation("Subscriptions");
                 });

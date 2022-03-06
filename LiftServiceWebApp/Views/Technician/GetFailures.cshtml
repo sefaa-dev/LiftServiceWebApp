@@ -1,0 +1,72 @@
+﻿@{ ViewBag.Title = "Arızalar";}
+@model List<Failure>
+
+<Style>
+    .ss_two_sec:after {
+        background: white;
+    }
+</Style>
+
+<div class="container-fluid ss_service_one ss_section_sec_bg spacer_top spacer_bottom ss_two">
+    <div class="row">
+
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+
+                <h1>Arızalar</h1><br />
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Arıza</th>
+                            <th scope="col">Arıza Detay</th>
+                            <th scope="col">Adres</th>
+                            <th scope="col">Oluşturulma Tarihi</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 1; i <= Model.Count(); i++)
+                        {
+                            <tr>
+                                <th scope="row">@i</th>
+                                <td>@Model[i - 1].FailureName</td>
+                                <td>@Model[i - 1].FailureDescription</td>
+                                <td>@Model[i - 1].AddressDetail</td>
+                                <td>@Model[i - 1].CreatedDate</td>
+                                <td>
+                                    @{
+                                        if (i == 1)
+                                        {
+                                            if (Model[0].FailureState == FailureStates.KabulEdildi)
+                                            {
+                                                <form method="post" asp-action="Payment" asp-controller="Technician">
+                                                    <input type="hidden" asp-for="@Model[0].UserId" name="UserId" />
+                                                    <input type="hidden" asp-for="@Model[0].TechnicianId" name="TechnicianId" />
+                                                    <input type="hidden" asp-for="@Model[0].Id" name="FailureId"/>
+                                                    <button class="btn btn-outline-primary">ÜCRETLENDİR</button>
+                                                </form>
+                                            }
+                                            else
+                                            {
+                                                <form method="post" asp-action="GetFailures" asp-controller="Technician">
+                                                    <input type="hidden" asp-for="@Model[0].Id" name="failureId" />
+                                                    <button class="btn btn-outline-primary">KABUL ET</button>
+                                                </form>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <h6>Sırada Bekliyor</h6>
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

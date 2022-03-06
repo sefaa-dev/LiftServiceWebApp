@@ -20,12 +20,11 @@
     <link rel="stylesheet" href="~/user-assets/css/swiper.min.css" />
     <link rel="stylesheet" href="~/user-assets/css/animate.css" />
     <link rel="stylesheet" href="~/user-assets/css/style.css" />
+    <link rel="stylesheet" href="~/vendor/devextreme/dist/css/dx.light.css">
+
     <!--=== Favicon Link ===-->
     <link rel="shortcut icon" type="image/png" href="~/user-assets/images/fav-icon.png">
-
-    <!-- Extra Assets Css -->
-    <link type="text/css" href="~/extra-assets/css/app.css" rel="stylesheet">
-    <link rel="stylesheet" href="~/extra-assets/css/sweetalert.css">
+  
     @await RenderSectionAsync("Styles", required: false)
 
 </head>
@@ -41,7 +40,7 @@
 
     <!--===== script start =====-->
     <script src="~/user-assets/js/jquery.min.js"></script>
-    <script src="~/user-assets/js/bootstrap.min.js"></script>
+    <script src="~/user-assets/js/bootstrap.bundle.min.js"></script>
     <script src="~/user-assets/js/jquery.magnific-popup.min.js"></script>
     <script src="~/user-assets/js/isotope.pkgd.min.js"></script>
     <script src="~/user-assets/js/swiper.min.js"></script>
@@ -49,17 +48,11 @@
     <script src="~/user-assets/js/jquery.flot.min.js"></script>
     <script src="~/user-assets/js/script.js"></script>
 
-    <!-- Extra Assets -->
-    <script src="~/extra-assets/vendor/jquery.min.js"></script>
-    <script src="~/extra-assets/vendor/popper.min.js"></script>
-    <script src="~/extra-assets/vendor/bootstrap.min.js"></script>
-    <script src="~/extra-assets/vendor/perfect-scrollbar.min.js"></script>
-    <script src="~/extra-assets/vendor/dom-factory.js"></script>
-    <script src="~/extra-assets/js/app.js"></script>
-    <script src="~/extra-assets/js/settings.js"></script>
-    <script src="~/extra-assets/vendor/sweetalert.min.js"></script>
-    <script src="~/extra-assets/js/sweetalert.js"></script>
-    <!-- Extra Assets -->
+    <script type="text/javascript" src="~/vendor/exceljs/dist/exceljs.min.js"></script>
+    <script type="text/javascript" src="~/vendor/file-saver/dist/fileSaver.min.js"></script>
+    <script type="text/javascript" src="~/vendor/jszip/dist/jszip.min.js"></script>
+    <script type="text/javascript" src="~/vendor/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/vendor/devextreme/dist/js/dx.all.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 
