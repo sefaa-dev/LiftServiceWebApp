@@ -28,11 +28,16 @@ namespace LiftServiceWebApp.Data
             builder.Entity<Subscription>()
                 .Property(x => x.PaidAmount)
                 .HasPrecision(8, 2);
+
+            builder.Entity<BasketProduct>()
+                .HasKey(x => new { x.BasketId, x.ProductId });
         }
 
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<SubscriptionType> SubscriptionTypes { get; set; }
         public DbSet<Failure> Failures { get; set; }
+        public DbSet<BasketProduct> BasketProducts { get; set; }
+        
     }
 }

@@ -62,6 +62,62 @@ namespace LiftServiceWebApp.Migrations
                     b.ToTable("Addresses");
                 });
 
+            modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Basket", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedUser")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("CustomerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("FailureId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("OrderStatue")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedUser")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("FailureId");
+
+                    b.ToTable("Baskets");
+                });
+
+            modelBuilder.Entity("LiftServiceWebApp.Models.Entities.BasketProduct", b =>
+                {
+                    b.Property<Guid>("BasketId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("BasketId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("BasketProducts");
+                });
+
             modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Failure", b =>
                 {
                     b.Property<Guid>("Id")
@@ -111,6 +167,45 @@ namespace LiftServiceWebApp.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Failures");
+                });
+
+            modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedUser")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedUser")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<int>("category")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Subscription", b =>
@@ -420,6 +515,42 @@ namespace LiftServiceWebApp.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Basket", b =>
+                {
+                    b.HasOne("LiftServiceWebApp.Models.Identity.ApplicationUser", "CustomerUser")
+                        .WithMany("Baskets")
+                        .HasForeignKey("CustomerId");
+
+                    b.HasOne("LiftServiceWebApp.Models.Entities.Failure", "Failure")
+                        .WithMany()
+                        .HasForeignKey("FailureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CustomerUser");
+
+                    b.Navigation("Failure");
+                });
+
+            modelBuilder.Entity("LiftServiceWebApp.Models.Entities.BasketProduct", b =>
+                {
+                    b.HasOne("LiftServiceWebApp.Models.Entities.Basket", "Basket")
+                        .WithMany("BasketProducts")
+                        .HasForeignKey("BasketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LiftServiceWebApp.Models.Entities.Product", "Product")
+                        .WithMany("BasketProducts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Basket");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Failure", b =>
                 {
                     b.HasOne("LiftServiceWebApp.Models.Identity.ApplicationUser", "ApplicationUser")
@@ -497,9 +628,21 @@ namespace LiftServiceWebApp.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Basket", b =>
+                {
+                    b.Navigation("BasketProducts");
+                });
+
+            modelBuilder.Entity("LiftServiceWebApp.Models.Entities.Product", b =>
+                {
+                    b.Navigation("BasketProducts");
+                });
+
             modelBuilder.Entity("LiftServiceWebApp.Models.Identity.ApplicationUser", b =>
                 {
                     b.Navigation("Addresses");
+
+                    b.Navigation("Baskets");
 
                     b.Navigation("Subscriptions");
                 });

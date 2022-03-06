@@ -16,5 +16,6 @@ namespace LiftServiceWebApp.Models.Identity
 
         public virtual List<Address> Addresses { get; set; }
         public virtual List<Subscription> Subscriptions { get; set; }
+        public virtual List<Basket> Baskets { get; set; }
     }
 }

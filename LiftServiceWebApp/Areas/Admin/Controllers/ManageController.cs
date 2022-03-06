@@ -28,6 +28,10 @@ namespace LiftServiceWebApp.Areas.Admin.Controllers
         {
             return View();
         }
+        public IActionResult BasketProduct()
+        {
+            return View();
+        }
 
         public async Task<IActionResult> RoleAssign(string id)
         {
