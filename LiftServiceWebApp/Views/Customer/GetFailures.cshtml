@@ -1,13 +1,14 @@
-﻿@{ ViewBag.Title = "Arızalar";}
-@model List<AssignedFailureViewModel>
-
+﻿@{ ViewBag.Title = "Arıza Servis Talepleri";}
+@model List<Failure>
 <Style>
     .ss_two_sec:after {
         background: white;
     }
+
     .table thead th {
         padding-bottom: 25px;
     }
+
     .table td, .table th {
         vertical-align: inherit;
     }
@@ -19,42 +20,95 @@
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
 
-                <h1>Arızalar</h1>
-                <hr />    
-                <br /><br />
-
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+
                             <th scope="col">Arıza Adı</th>
                             <th scope="col">Arıza Detay</th>
                             <th scope="col">Durumu</th>
-                            <th scope="col">Teknisyen</th>
+                            <th scope="col">Sil</th>
+                            <th scope="col">Düzenle</th>
+                            <th scope="col">Öde</th>
+                            <th scope="col">Detay</th>
+
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @for (int i = 1; i <= Model.Count(); i++)
+                        @foreach (var item in Model)
                         {
-                            <tr>
-                                <th scope="row">@i</th>
-                                <td>@Model[i - 1].FailureName</td>
-                                <td>@Model[i - 1].FailureDescription</td>
-                                <td>@Model[i - 1].FailureState</td>
-                                <td>@if (Model[i - 1].TechnicianName == null)
-                                    {<h5 class="text-danger bold"> X </h5>}
-                                        else 
-                                    {<h5>@Model[i - 1].TechnicianName</h5>}
-                                    </td>
+                        <tr>
+
+                            <td>@item.FailureName</td>
+                            <td>@item.FailureDescription</td>
+                            <td>@item.FailureState.ToString()</td>
+                            @if (item.FailureState == FailureStates.Alındı)
+                            {
                                 <td>
-                                    <form method="post" asp-action="GetFailure" asp-controller="Customer">
-                                        <input type="hidden" asp-for="@Model[0]" name="failureId" />
-                                        <button class="btn btn-secondary">Detay</button>
-                                    </form>
+                                    <a class="btn btn-danger" asp-controller="Customer" asp-action="DeleteFailure" asp-route-id="@item.Id">
+                                        Sil
+                                    </a>
                                 </td>
-                            </tr>
+                                <td>
+                                    <a class="btn btn-primary" asp-controller="Customer" asp-action="UpdateFailure" asp-route-id="@item.Id">
+                                        Düzenle
+                                    </a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-secondary disabled">Sil</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-secondary disabled">Düzenle</button>
+                                </td>
+
+                            }
+                            @if (item.FailureState == FailureStates.OdemeBekleniyor)
+                            {
+                                <td>
+                                    <a class="btn btn-warning" asp-controller="Customer" asp-action="UpdateFailure" asp-route-id="@item.Id">
+                                        Öde
+                                    </a>
+                                </td>
+                            }
+                            else if (item.FailureState == FailureStates.Sonuclandi)
+                            {
+                                <td>
+                                    <a class="btn btn-success disabled">
+                                        Öde
+                                    </a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-secondary disabled">Öde</button>
+                                </td>
+                            }
+
+                            @if (item.FailureState == FailureStates.OdemeBekleniyor || item.FailureState == FailureStates.Sonuclandi)
+                            {
+                                <td>
+                                    <a class="btn btn-info disabled" asp-controller="Customer" asp-action="UpdateFailure" asp-route-id="@item.Id">
+                                        Detay
+                                    </a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <a class="btn btn-secondary disabled" asp-controller="Customer" asp-action="UpdateFailure" asp-route-id="@item.Id">
+                                        Detay
+                                    </a>
+                                </td>
+                            }
+
+                        </tr>
                         }
+
                     </tbody>
                 </table>
             </div>

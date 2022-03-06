@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LiftServiceWebApp.Data;
 using LiftServiceWebApp.Extensions;
 using LiftServiceWebApp.Models.Entities;
 using LiftServiceWebApp.Models.Identity;
@@ -18,14 +19,17 @@ namespace LiftServiceWebApp.Controllers
         private readonly FailureRepo _failureRepo;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
+        private readonly MyContext _dbContext;
 
         public CustomerController(FailureRepo failureRepo,
             UserManager<ApplicationUser> userManager,
-            IMapper mapper)
+            IMapper mapper,
+            MyContext dbcontext)
         {
             _failureRepo = failureRepo;
             _userManager = userManager;
             _mapper = mapper;
+            _dbContext = dbcontext;
         }
         public IActionResult Index()
         {
@@ -92,27 +96,26 @@ namespace LiftServiceWebApp.Controllers
             return RedirectToAction("Failures");
         }
             
-        public async Task<IActionResult> GetFailures()
+        public IActionResult GetFailures()
         {
-            var failures = _failureRepo.Get().ToList();
-            List<AssignedFailureViewModel> assignedFailureViewModels = new List<AssignedFailureViewModel>();
-            foreach (var item in failures)
+            //var user = await _userManager.FindByIdAsync(HttpContext.GetUserId());
+            var failures = _dbContext.Failures.Where(x => x.UserId == HttpContext.GetUserId()).ToList();
+            
+            return View(failures);
+            
+        }
+        public IActionResult DeleteFailure(Guid id)
+        {
+            var failure = _dbContext.Failures.Find(id);
+            if (failure == null)
             {
-                var technician = await _userManager.FindByIdAsync(item.TechnicianId);
-                string technicianName;
-                if (technician == null)
-                    technicianName = null;
-                else
-                    technicianName = $"{ technician.Name.ToUpper() } { technician.Surname.ToUpper() }";
-                assignedFailureViewModels.Add(new AssignedFailureViewModel
-                {
-                    FailureName = item.FailureName,
-                    FailureDescription = item.FailureDescription,
-                    FailureState = item.FailureState,
-                    TechnicianName = technicianName
-                });
+
             }
-            return View(assignedFailureViewModels);
+
+            _dbContext.Remove(failure);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("GetFailures");
         }
     }
 }
