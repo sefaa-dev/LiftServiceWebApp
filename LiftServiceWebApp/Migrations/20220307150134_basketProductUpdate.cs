@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LiftServiceWebApp.Migrations
 {
-    public partial class BasketProduct_AraTablo : Migration
+    public partial class basketProductUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

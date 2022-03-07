@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LiftServiceWebApp.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20220301190612_BasketProduct_AraTablo")]
-    partial class BasketProduct_AraTablo
+    [Migration("20220307150134_basketProductUpdate")]
+    partial class basketProductUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
