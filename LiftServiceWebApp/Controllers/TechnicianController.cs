@@ -18,15 +18,17 @@ namespace LiftServiceWebApp.Controllers
         private readonly FailureRepo _failureRepo;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
-
+        private readonly ProductRepo _productRepo;
         public TechnicianController(
             FailureRepo failureRepo,
             UserManager<ApplicationUser> userManager,
-            RoleManager<ApplicationRole> roleManager)
+            RoleManager<ApplicationRole> roleManager,
+            ProductRepo productRepo)
         {
             _failureRepo = failureRepo;
             _userManager = userManager;
             _roleManager = roleManager;
+            _productRepo = productRepo;
         }
 
         public async Task<IActionResult> GetFailures()
@@ -52,8 +54,8 @@ namespace LiftServiceWebApp.Controllers
         [HttpPost]
         public IActionResult Payment(PaymentIdViewModel paymentIdViewModel)
         {
-            
-            return View();
+            var products = _productRepo.Get().ToList();
+            return View(products);
         }
 
         
