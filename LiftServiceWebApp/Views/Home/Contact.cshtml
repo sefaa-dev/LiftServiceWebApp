@@ -1,6 +1,9 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Hakkında";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
 <section class="ss_map">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3369734.150220435!2d-96.57871699241277!3d38.99279830162545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1564574037986!5m2!1sen!2sin" frameborder="0" style="border:0" allowfullscreen></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.13829902613!2d29.004627714793234!3d41.0441046251694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab7a24975fe5d%3A0xa05d7aa13cfcaf89!2sWissen!5e0!3m2!1str!2str!4v1646791161703!5m2!1str!2str" frameborder="0" style="border:0" allowfullscreen></iframe>
 </section>
 
 <section class="ss_contact ss_section_sec_bg spacer_bottom">
@@ -67,22 +70,22 @@
                         <h1>Get in touch</h1>
                         <form>
                             <div class="ss_contact_form">
-                                <label>Name</label>
-                                <input type="text" placeholder="Enter your name" name="full_name" id="full_name" class="require" />
+                                <label>Ad</label>
+                                <input type="text" placeholder="Adınızı giriniz." name="full_name" id="full_name" class="require" />
                             </div>
                             <div class="ss_contact_form">
-                                <label>Email</label>
-                                <input type="text" name="email" id="email" placeholder="Enter your email" class="require" data-valid="email" data-error="Email should be valid." />
+                                <label>Eposta</label>
+                                <input type="text" name="email" id="email" placeholder="Eposta adresinizi giriniz." class="require" data-valid="email" data-error="Email should be valid." />
                             </div>
                             <div class="ss_contact_form">
-                                <label>Subject</label>
-                                <input type="text" name="subject" id="subject" placeholder="Enter your subject" class="require" />
+                                <label>Konu</label>
+                                <input type="text" name="subject" id="subject" placeholder="Konuyu giriniz." class="require" />
                             </div>
                             <div class="ss_contact_form">
-                                <label class="ss_message">Message</label>
-                                <textarea name="message" id="message" placeholder="Enter your message" class="require"></textarea>
+                                <label class="ss_message">Mesaj</label>
+                                <textarea name="message" id="message" placeholder="Mesajınızı giriniz." class="require"></textarea>
                             </div>
-                            <button type="button" class="ss_btn submitForm">Submit</button>
+                            <button type="button" class="ss_btn submitForm">Gönder</button>
                             <div class="response"></div>
                         </form>
                     </div>
