@@ -1,0 +1,86 @@
+﻿@{ ViewBag.Title = "Arıza/Bakım Servis Detayları";}
+@*@model List<Failure>*@
+<Style>
+    .ss_two_sec:after {
+        background: white;
+    }
+
+    .table thead th {
+        padding-bottom: 25px;
+    }
+
+    .table td, .table th {
+        vertical-align: inherit;
+    }
+</Style>
+
+<div class="container-fluid ss_service_one ss_section_sec_bg spacer_top spacer_bottom ss_two">
+    <div class="row">
+        <div class="col-lg-9 col-md-9 col-sm-9">
+
+
+            <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Hizmet </th>
+                            <th scope="col">Fiyat</th>
+                            <th scope="col">Adet</th>
+                            <th scope="col">Aratoplam</th>
+
+
+                            @*<th scope="col">Fiyat</th>
+                            <th scope="col">Adet</th>
+                            <th scope="col">Tutar</th>*@
+
+
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*@foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>@item.FailureName</td>
+                                <td>@item.FailureDescription</td>
+                                <td>@item.FailureState.ToString()</td>
+
+
+                                    <td>
+                                        <button type="button" class="btn btn-secondary disabled">Öde</button>
+                                    </td>
+
+                            </tr>
+                        }*@
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3">
+           @* <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">*@
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Toplam</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Toplam</td>
+                            <td>
+                                <button type="button" class="btn btn-secondary disabled">Öde</button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+
+            @*</div>*@
+        </div>
+    </div>
+</div>

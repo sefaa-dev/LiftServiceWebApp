@@ -75,7 +75,7 @@ namespace LiftServiceWebApp
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseStatusCodePagesWithReExecute("/Error/NotFound", "?code={0}");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

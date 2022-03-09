@@ -117,5 +117,10 @@ namespace LiftServiceWebApp.Controllers
 
             return RedirectToAction("GetFailures");
         }
+        public IActionResult FailureDetails(Guid id)
+        {
+            return View();
+
+        }
     }
 }
