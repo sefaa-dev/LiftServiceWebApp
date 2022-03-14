@@ -4,64 +4,122 @@
     .p {
         font-size: 30px;
     }
+
     .ss_two_sec {
         height: 220px;
     }
+
+    .ss_cart_bg {
+        visibility: visible;
+    }
 </Style>
+
 <div class="container-fluid ss_service_one ss_section_sec_bg spacer_top spacer_bottom ss_two">
-    <div class="col-lg-12">
-        <div>
-            <h1>İşçilik</h1>
-            <hr />
-            <br />
-            <div class="row">
-                @foreach (var item in Model)
-                {
-                    <div class="col-lg-3">
-                        <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                            <p class="fs-6 mb-0"> @item.Name.ToUpper()</p>
-                            <p class="my-2">₺ @item.UnitPrice</p>
-                            <div class="d-grid">
-                                <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Ekle</a>
+    <div class="row">
+        <div class="w-75 p-3">
+            <div class="col-lg-12">
+                <div>
+                    <h1>İşçilik</h1>
+                    <hr />
+                    <br />
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-lg-4">
+                                <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+                                    <p class="fs-6 mb-0"> @item.Name.ToUpper()</p>
+                                    <p class="my-2">₺ @item.UnitPrice</p>
+                                    <div class="d-grid">
+                                        <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Ekle</a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        }
                     </div>
-                }
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                </div>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
-        </div>
-    </div>
-    <div class="col-lg-12">
-        <div>
-            <h1>Ürün</h1>
-            <hr />
-            <br />
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                        <div class="col">
-                            <div class="card radius-10">
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <h4 class="fs-6 mb-0"> ÜRÜN İSMİ</h4>
-                                        <h4 class="my-2">₺ Fiyat</h4>
-                                        <div class="d-grid">
-                                            <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Sepete Ekle</a>
+            <div class="col-lg-12">
+                <div>
+                    <h1>Ürün</h1>
+                    <hr />
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+                                <div class="col">
+                                    <div class="card radius-10">
+                                        <div class="card-body">
+                                            <div class="text-center">
+                                                <h4 class="fs-6 mb-0"> ÜRÜN İSMİ</h4>
+                                                <h4 class="my-2">₺ Fiyat</h4>
+                                                <div class="d-grid">
+                                                    <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Sepete Ekle</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
                 </div>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
+        </div>
+
+        <div class="w-25 p-3" style="margin-top: 105px;">
+            <div class="ss_cart_bg">
+                <div class="ss_cart_list">
+                    <a href="#">
+                        <div class="ss_cart_img">
+                            <img class="img-fluid" src="~/user-assets/images/svg/icon1.svg" alt="image">
+                        </div>
+                        <div class="ss_cart_content">
+                            Solar Panel
+                            <span>$12 - $45</span>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="ss_cart_img">
+                            <img class="img-fluid" src="~/user-assets/images/svg/icon2.svg" alt="image">
+                        </div>
+                        <div class="ss_cart_content">
+                            Solar Water
+                            <span>$12 - $45</span>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="ss_cart_img">
+                            <img class="img-fluid" src="~/user-assets/images/svg/icon3.svg" alt="image">
+                        </div>
+                        <div class="ss_cart_content">
+                            Domestic Solar
+                            <span>$12 - $45</span>
+                        </div>
+                    </a>
+                    <a href="#">
+                        <div class="ss_cart_img">
+                            <img class="img-fluid" src="~/user-assets/images/svg/icon4.svg" alt="image">
+                        </div>
+                        <div class="ss_cart_content">
+                            Solar Wind
+                            <span>$12 - $45</span>
+                        </div>
+                    </a>
+                </div>
+                <p class="ss_cart_total">Total: <span>$150.00</span></p>
+                <p class="ss_cart_btn">
+                    <span><a href="cart.html" class="ss_btn">View Cart</a></span>
+                    <span><a href="checkout.html" class="ss_btn">Checkout</a></span>
+                </p>
+            </div>
         </div>
     </div>
 </div>

@@ -399,33 +399,22 @@ h3.ss_h3_center:before {
     margin-bottom: 13px;
 }
 .ss_cart_bg {
-    position: absolute;
-    top: 25px;
-    width: 300px;
-    background: #fff;
-    text-align: left;
-    z-index: 99;
-    height: 0px;
-    opacity: 0;
-    visibility: hidden;
-    height: 0;
-    right: 0;
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px 0px rgba(131, 149, 255, 0.14);
+	position: sticky;
+	right: 20px;
+	top: 20px;
+	width: 300px;
+	background: #fff;
+	text-align: left;
+	z-index: 99;
+	height: 370px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 20px 0px rgb(131 149 255 / 14%);
 }
 .ss_cart_list {
 	text-align: left;
     overflow-x: auto;
 	height: 250px;
 	padding:20px;
-}
-.ss_cart_ico:hover .ss_cart_bg{
-	visibility:visible;
-	opacity:1;
-	transition:0.3s;
-	-webkit-transition:0.3s;
-	-moz-transition:0.3s;
-	height: 370px;
 }
 .ss_cart_list .ss_cart_img {
     width: calc(100% - 205px);
@@ -3358,7 +3347,7 @@ div#thumbs_img ul{
 		top: 42px;
 	}
 	.ss_cart_bg:after {
-		position: absolute;
+		position: fixed;
 		content: '';
 		border-left: 13px solid #17171700;
 		border-right: 13px solid #50222200;
@@ -3366,12 +3355,6 @@ div#thumbs_img ul{
 		border-bottom: 17px solid #ffffff;
 		top: -17px;
 		left: 50px;
-		opacity:0;
-		visibility:hidden;
-	}
-	.ss_cart_ico:hover .ss_cart_bg:after {
-		opacity:1;
-		visibility:visible;
 	}
 	.mt-md-4{
 		margin-top: 1.5rem;
