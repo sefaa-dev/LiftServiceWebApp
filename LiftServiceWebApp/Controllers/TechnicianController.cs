@@ -58,6 +58,11 @@ namespace LiftServiceWebApp.Controllers
             return View(products);
         }
 
+        [HttpPost]
+        public JsonResult AddProduct(Guid id)
+        {
+            return Json(id);
+        }
         
     }
 }

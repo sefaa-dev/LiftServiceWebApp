@@ -25,15 +25,23 @@
                     <div class="row">
                         @foreach (var item in Model)
                         {
-                            <div class="col-lg-4">
-                                <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                                    <p class="fs-6 mb-0"> @item.Name.ToUpper()</p>
-                                    <p class="my-2">₺ @item.UnitPrice</p>
-                                    <div class="d-grid">
-                                        <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Ekle</a>
-                                    </div>
+                            
+                                <div class="col-lg-4">
+                                    <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+                                        <form id="idForm">
+                                            <p class="fs-6 mb-0"> @item.Name.ToUpper()</p>
+                                            <p class="my-2">₺ @item.UnitPrice</p>
+                                            <input id="productId" type="hidden" asp-for="@item.Id" />
+
+                                            <div class="d-grid">
+                                                <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> <input type="submit" value="Ekle"></a>
+                                            </div>
+                                        </form>
+                                   
+</div>
                                 </div>
-                            </div>
+                            
+
                         }
                     </div>
                     <br />
@@ -114,235 +122,58 @@
                         </div>
                     </a>
                 </div>
-                <p class="ss_cart_total">Total: <span>$150.00</span></p>
+                <p class="ss_cart_total">Total: <span>$ .</span></p>
                 <p class="ss_cart_btn">
-                    <span><a href="cart.html" class="ss_btn">View Cart</a></span>
-                    <span><a href="checkout.html" class="ss_btn">Checkout</a></span>
+                    <span><button class="ss_btn" id="checkout"> Müşteriye Hesabı Yolla </button></span>
                 </p>
             </div>
         </div>
     </div>
 </div>
 
-@*  Çalışan versiyonlar
-
-        @{ ViewBag.Title = "Odeme";}
-
-    <div class="container-fluid ss_service_one ss_section_sec_bg spacer_top spacer_bottom ss_two">
-        <div class="col-lg-12">
-            <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                            <div class="col">
-                                <div class="card radius-10">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <p class="fs-6 mb-0">Titen Watch</p>
-                                            <h4 class="my-2">$60</h4>
-                                            <div class="d-grid">
-                                                <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Add To Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                            <div class="col">
-                                <div class="card radius-10">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <p class="fs-6 mb-0">Titen Watch</p>
-                                            <h4 class="my-2">$60</h4>
-                                            <div class="d-grid">
-                                                <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Add To Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                            <div class="col">
-                                <div class="card radius-10">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <p class="fs-6 mb-0">Titen Watch</p>
-                                            <h4 class="my-2">$60</h4>
-                                            <div class="d-grid">
-                                                <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Add To Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                            <div class="col">
-                                <div class="card radius-10">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <p class="fs-6 mb-0">Titen Watch</p>
-                                            <h4 class="my-2">$60</h4>
-                                            <div class="d-grid">
-                                                <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Add To Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                            <div class="col">
-                                <div class="card radius-10">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <p class="fs-6 mb-0">Titen Watch</p>
-                                            <h4 class="my-2">$60</h4>
-                                            <div class="d-grid">
-                                                <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Add To Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                            <div class="col">
-                                <div class="card radius-10">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <p class="fs-6 mb-0">Titen Watch</p>
-                                            <h4 class="my-2">$60</h4>
-                                            <div class="d-grid">
-                                                <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Add To Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-12">
-            <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                            <div class="col">
-                                <div class="card radius-10">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <p class="fs-6 mb-0">Titen Watch</p>
-                                            <h4 class="my-2">$60</h4>
-                                            <div class="d-grid">
-                                                <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Add To Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                            <div class="col">
-                                <div class="card radius-10">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <p class="fs-6 mb-0">Titen Watch</p>
-                                            <h4 class="my-2">$60</h4>
-                                            <div class="d-grid">
-                                                <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Add To Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                            <div class="col">
-                                <div class="card radius-10">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <p class="fs-6 mb-0">Titen Watch</p>
-                                            <h4 class="my-2">$60</h4>
-                                            <div class="d-grid">
-                                                <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Add To Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                            <div class="col">
-                                <div class="card radius-10">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <p class="fs-6 mb-0">Titen Watch</p>
-                                            <h4 class="my-2">$60</h4>
-                                            <div class="d-grid">
-                                                <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Add To Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                            <div class="col">
-                                <div class="card radius-10">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <p class="fs-6 mb-0">Titen Watch</p>
-                                            <h4 class="my-2">$60</h4>
-                                            <div class="d-grid">
-                                                <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Add To Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                            <div class="col">
-                                <div class="card radius-10">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <p class="fs-6 mb-0">Titen Watch</p>
-                                            <h4 class="my-2">$60</h4>
-                                            <div class="d-grid">
-                                                <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Add To Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
+@section Scripts
+{
+    <script>
+        $('#idForm').submit(function (e) {
+            e.preventDefault();
+            var id = $(this.);
+            $.ajax({
+                url: "/technician/addProduct",
+                type: "POST",
+                data: form,
+                datatype: "json",
+                error: function (request, status, error) {
+                    console.log(request);
+                    alert("Buton bozuk");
+                },
+                success: function (response) {
+                    console.log(response);
+                    alert("Buton çalışıyor");
+                }
+            });
+        });
+    </script>
+    @*<script>
+            $('#checkout').onClick(function () {
+                //var technicianId = $('#technician').val();
+                //var failureId = $('#failureId').val();
+                $.ajax({
+                    url: "/operator/failureAssign",
+                    type: "POST",
+                    data:
+                    {
+                        "price": technicianId,
+                        "failureId": failureId
+                    },
+                    datatype: "json",
+                    error: function (request, status, error) {
+                        console.log(request);
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        alert("Teknisyen Atandı");
+                    }
+                });
+            });
+        </script>*@
+}
