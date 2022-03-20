@@ -1,179 +1,186 @@
-﻿@{ ViewBag.Title = "Ödeme";}
+﻿@{
+	ViewBag.Title = "Ödeme";
+}
 @model List<Product>
 <Style>
-    .p {
-        font-size: 30px;
-    }
+	.p {
+		font-size: 30px;
+	}
 
-    .ss_two_sec {
-        height: 220px;
-    }
+	.ss_two_sec {
+		height: 220px;
+	}
 
-    .ss_cart_bg {
-        visibility: visible;
-    }
+	.ss_cart_bg {
+		visibility: visible;
+	}
 </Style>
 
 <div class="container-fluid ss_service_one ss_section_sec_bg spacer_top spacer_bottom ss_two">
-    <div class="row">
-        <div class="w-75 p-3">
-            <div class="col-lg-12">
-                <div>
-                    <h1>İşçilik</h1>
-                    <hr />
-                    <br />
-                    <div class="row">
-                        @foreach (var item in Model)
-                        {
-                            
-                                <div class="col-lg-4">
-                                    <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                                        <form id="idForm">
-                                            <p class="fs-6 mb-0"> @item.Name.ToUpper()</p>
-                                            <p class="my-2">₺ @item.UnitPrice</p>
-                                            <input id="productId" type="hidden" asp-for="@item.Id" />
+	<div class="row">
+		<!-- Add Cart Start -->
+		<div class="col-xl-9 col-lg-8 col-md-7 col-sm-12 col-12">
+			<div>
+				<h1>İşçilik</h1>
+				<hr />
+				<br />
+				<div class="row">
+					@foreach (var item in Model)
+					{
 
-                                            <div class="d-grid">
-                                                <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> <input type="submit" value="Ekle"></a>
-                                            </div>
-                                        </form>
-                                   
-</div>
-                                </div>
-                            
+						<div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 col-12">
+							<div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+								<p class="fs-6 mb-0"> @item.Name.ToUpper()</p>
+								<p class="my-2">₺ @item.UnitPrice</p>
+								<div class="d-grid">
+									<button id="add-product" class="btn btn-info radius-10 mt-3">
+										<ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon>
+										Ekle
+									</button>
+								</div>
+							</div>
+						</div>
+					}
+					<div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 col-12">
+						<div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+							<p class="fs-6 mb-0"> Name.ToUpper()</p>
+							<p class="my-2">₺ UnitPrice</p>
+							<div class="d-grid">
+								<button id="add-product" class="btn btn-info radius-10 mt-3">
+									<ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon>
+									Ekle
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-sm-12 col-12">
+						<div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+							<p class="fs-6 mb-0"> Name.ToUpper()</p>
+							<p class="my-2">₺ UnitPrice</p>
+							<div class="d-grid">
+								<button id="add-product" class="btn btn-info radius-10 mt-3">
+									<ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon>
+									Ekle
+								</button>
+							</div>
+						</div>
+					</div><div class="col-lg-4 col-md-6 col-sm-12 col-12">
+						<div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+							<p class="fs-6 mb-0"> Name.ToUpper()</p>
+							<p class="my-2">₺ UnitPrice</p>
+							<div class="d-grid">
+								<button id="add-product" class="btn btn-info radius-10 mt-3">
+									<ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon>
+									Ekle
+								</button>
+							</div>
+						</div>
+					</div><div class="col-lg-4 col-md-6">
+						<div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+							<p class="fs-6 mb-0"> Name.ToUpper()</p>
+							<p class="my-2">₺ UnitPrice</p>
+							<div class="d-grid">
+								<button id="add-product" class="btn btn-info radius-10 mt-3">
+									<ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon>
+									Ekle
+								</button>
+							</div>
+						</div>
+					</div><div class="col-lg-4 col-md-6">
+						<div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
+							<p class="fs-6 mb-0"> Name.ToUpper()</p>
+							<p class="my-2">₺ UnitPrice</p>
+							<div class="d-grid">
+								<button id="add-product" class="btn btn-info radius-10 mt-3">
+									<ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon>
+									Ekle
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br />
+				<br />
+				<br />
+				<br />
+			</div>
+		</div>
+		<!-- Add Chart End -->
+		<!-- Cart Start -->
+		<div class="ss_cart_little_page" style="margin-top: 105px; margin-bottom:128px;">
+			<div class="ss_cart_bg">
+				<div class="ss_cart_list">
+					<a href="#">
+						<div class="ss_cart_content">
+							Solar Panel
+							<span>$12 - $45</span>
+						</div>
+					</a>
+					<a href="#">
+						<div class="ss_cart_content">
+							Solar Water
+							<span>$12 - $45</span>
+						</div>
+					</a>
+					<a href="#">
+						<div class="ss_cart_content">
+							Domestic Solar
+							<span>$12 - $45</span>
+						</div>
+					</a>
+					<a href="#">
+						<div class="ss_cart_content">
+							Solar Wind
+							<span>$12 - $45</span>
+						</div>
+					</a>
+				</div>
+				<p class="ss_cart_total">Total: <span>$ .</span></p>
+				<p class="ss_cart_btn">
+					<span><button class="ss_btn" id="checkout"> Müşteriye Hesabı Yolla </button></span>
+				</p>
+			</div>
+		</div>
+		<!-- Cart Start -->
 
-                        }
-                    </div>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div>
-                    <h1>Ürün</h1>
-                    <hr />
-                    <br />
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-                                <div class="col">
-                                    <div class="card radius-10">
-                                        <div class="card-body">
-                                            <div class="text-center">
-                                                <h4 class="fs-6 mb-0"> ÜRÜN İSMİ</h4>
-                                                <h4 class="my-2">₺ Fiyat</h4>
-                                                <div class="d-grid">
-                                                    <a href="javascript:;" class="btn btn-info radius-10 mt-3"><ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon> Sepete Ekle</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                </div>
-            </div>
-        </div>
-
-        <div class="w-25 p-3" style="margin-top: 105px;">
-            <div class="ss_cart_bg">
-                <div class="ss_cart_list">
-                    <a href="#">
-                        <div class="ss_cart_img">
-                            <img class="img-fluid" src="~/user-assets/images/svg/icon1.svg" alt="image">
-                        </div>
-                        <div class="ss_cart_content">
-                            Solar Panel
-                            <span>$12 - $45</span>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="ss_cart_img">
-                            <img class="img-fluid" src="~/user-assets/images/svg/icon2.svg" alt="image">
-                        </div>
-                        <div class="ss_cart_content">
-                            Solar Water
-                            <span>$12 - $45</span>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="ss_cart_img">
-                            <img class="img-fluid" src="~/user-assets/images/svg/icon3.svg" alt="image">
-                        </div>
-                        <div class="ss_cart_content">
-                            Domestic Solar
-                            <span>$12 - $45</span>
-                        </div>
-                    </a>
-                    <a href="#">
-                        <div class="ss_cart_img">
-                            <img class="img-fluid" src="~/user-assets/images/svg/icon4.svg" alt="image">
-                        </div>
-                        <div class="ss_cart_content">
-                            Solar Wind
-                            <span>$12 - $45</span>
-                        </div>
-                    </a>
-                </div>
-                <p class="ss_cart_total">Total: <span>$ .</span></p>
-                <p class="ss_cart_btn">
-                    <span><button class="ss_btn" id="checkout"> Müşteriye Hesabı Yolla </button></span>
-                </p>
-            </div>
-        </div>
-    </div>
+	</div>
 </div>
 
 @section Scripts
 {
-    <script>
-        $('#idForm').submit(function (e) {
-            e.preventDefault();
-            var id = $(this.);
-            $.ajax({
-                url: "/technician/addProduct",
-                type: "POST",
-                data: form,
-                datatype: "json",
-                error: function (request, status, error) {
-                    console.log(request);
-                    alert("Buton bozuk");
-                },
-                success: function (response) {
-                    console.log(response);
-                    alert("Buton çalışıyor");
-                }
-            });
-        });
-    </script>
-    @*<script>
-            $('#checkout').onClick(function () {
-                //var technicianId = $('#technician').val();
-                //var failureId = $('#failureId').val();
-                $.ajax({
-                    url: "/operator/failureAssign",
-                    type: "POST",
-                    data:
-                    {
-                        "price": technicianId,
-                        "failureId": failureId
-                    },
-                    datatype: "json",
-                    error: function (request, status, error) {
-                        console.log(request);
-                    },
-                    success: function (response) {
-                        console.log(response);
-                        alert("Teknisyen Atandı");
-                    }
-                });
-            });
-        </script>*@
+<script>
+	$('#idForm').submit(function (e) {
+		e.preventDefault();
+		var id = $(this.);
+		$.ajax({
+			url: "/technician/addProduct",
+			type: "POST",
+			data: form,
+			datatype: "json",
+			error: function (request, status, error) {
+				console.log(request);
+				alert("Buton bozuk");
+			},
+			success: function (response) {
+				console.log(response);
+				alert("Buton çalışıyor");
+			}
+		});
+	});
+</script>
+
+<script>
+	let lineNo = 1;
+	$(document).ready(function () {
+		$("#add-product").click(function () {
+			alert("Buton Çalıstı");
+			markup = `<div class="ss_cart_content">SolarPanel<span>$12 - $45</span></div>`;
+			//markup = "<tr><td>This is row "
+			//	+ lineNo + "</td></tr>";
+			cart = $(".ss_cart_list");
+			cart.append(markup);
+			lineNo++;
+		});
+	});
+</script>
 }
