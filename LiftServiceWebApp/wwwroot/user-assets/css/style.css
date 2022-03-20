@@ -403,6 +403,7 @@ h3.ss_h3_center:before {
 	float: right;
 	right: 20px;
 	top: 20px;
+	margin-left: 20px;
 	width: 300px;
 	background: #fff;
 	text-align: left;
@@ -431,11 +432,11 @@ h3.ss_h3_center:before {
 }
 
 .ss_cart_content span {
-    display: block;
+	display: block;
 }
 
 .ss_cart_list a {
-    text-align: left;
+	text-align: left;
 }
 
 .ss_cart_ico {

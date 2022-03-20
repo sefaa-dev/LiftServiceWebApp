@@ -7,12 +7,22 @@
 		font-size: 30px;
 	}
 
-	.ss_two_sec {
-		height: 220px;
+	a {
+		width: 70%;
+		overflow: hidden;
 	}
 
-	.ss_cart_bg {
-		visibility: visible;
+	.btn-danger {
+		width: 40px;
+		height: 40%;
+		text-align: center;
+	}
+
+	#product {
+		display: flex;
+		flex-wrap: wrap;
+		align-content: space-around;
+		justify-content: space-around;
 	}
 </Style>
 
@@ -33,7 +43,7 @@
 								<p class="fs-6 mb-0"> @item.Name.ToUpper()</p>
 								<p class="my-2">₺ @item.UnitPrice</p>
 								<div class="d-grid">
-									<button id="add-product" class="btn btn-info radius-10 mt-3">
+									<button data-id="@item.Id" data-name="@item.Name" data-price="@item.UnitPrice" id="add-product" class="btn btn-info radius-10 mt-3">
 										<ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon>
 										Ekle
 									</button>
@@ -41,63 +51,6 @@
 							</div>
 						</div>
 					}
-					<div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 col-12">
-						<div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-							<p class="fs-6 mb-0"> Name.ToUpper()</p>
-							<p class="my-2">₺ UnitPrice</p>
-							<div class="d-grid">
-								<button id="add-product" class="btn btn-info radius-10 mt-3">
-									<ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon>
-									Ekle
-								</button>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6 col-sm-12 col-12">
-						<div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-							<p class="fs-6 mb-0"> Name.ToUpper()</p>
-							<p class="my-2">₺ UnitPrice</p>
-							<div class="d-grid">
-								<button id="add-product" class="btn btn-info radius-10 mt-3">
-									<ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon>
-									Ekle
-								</button>
-							</div>
-						</div>
-					</div><div class="col-lg-4 col-md-6 col-sm-12 col-12">
-						<div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-							<p class="fs-6 mb-0"> Name.ToUpper()</p>
-							<p class="my-2">₺ UnitPrice</p>
-							<div class="d-grid">
-								<button id="add-product" class="btn btn-info radius-10 mt-3">
-									<ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon>
-									Ekle
-								</button>
-							</div>
-						</div>
-					</div><div class="col-lg-4 col-md-6">
-						<div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-							<p class="fs-6 mb-0"> Name.ToUpper()</p>
-							<p class="my-2">₺ UnitPrice</p>
-							<div class="d-grid">
-								<button id="add-product" class="btn btn-info radius-10 mt-3">
-									<ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon>
-									Ekle
-								</button>
-							</div>
-						</div>
-					</div><div class="col-lg-4 col-md-6">
-						<div class="ss_two_sec wow fadeIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;">
-							<p class="fs-6 mb-0"> Name.ToUpper()</p>
-							<p class="my-2">₺ UnitPrice</p>
-							<div class="d-grid">
-								<button id="add-product" class="btn btn-info radius-10 mt-3">
-									<ion-icon name="cart-sharp" role="img" class="md hydrated" aria-label="cart sharp"></ion-icon>
-									Ekle
-								</button>
-							</div>
-						</div>
-					</div>
 				</div>
 				<br />
 				<br />
@@ -110,32 +63,8 @@
 		<div class="ss_cart_little_page" style="margin-top: 105px; margin-bottom:128px;">
 			<div class="ss_cart_bg">
 				<div class="ss_cart_list">
-					<a href="#">
-						<div class="ss_cart_content">
-							Solar Panel
-							<span>$12 - $45</span>
-						</div>
-					</a>
-					<a href="#">
-						<div class="ss_cart_content">
-							Solar Water
-							<span>$12 - $45</span>
-						</div>
-					</a>
-					<a href="#">
-						<div class="ss_cart_content">
-							Domestic Solar
-							<span>$12 - $45</span>
-						</div>
-					</a>
-					<a href="#">
-						<div class="ss_cart_content">
-							Solar Wind
-							<span>$12 - $45</span>
-						</div>
-					</a>
 				</div>
-				<p class="ss_cart_total">Total: <span>$ .</span></p>
+				<p class="ss_cart_total">Total: <span>₺ 0</span></p>
 				<p class="ss_cart_btn">
 					<span><button class="ss_btn" id="checkout"> Müşteriye Hesabı Yolla </button></span>
 				</p>
@@ -148,38 +77,31 @@
 
 @section Scripts
 {
-<script>
-	$('#idForm').submit(function (e) {
-		e.preventDefault();
-		var id = $(this.);
-		$.ajax({
-			url: "/technician/addProduct",
-			type: "POST",
-			data: form,
-			datatype: "json",
-			error: function (request, status, error) {
-				console.log(request);
-				alert("Buton bozuk");
-			},
-			success: function (response) {
-				console.log(response);
-				alert("Buton çalışıyor");
-			}
-		});
-	});
-</script>
 
 <script>
-	let lineNo = 1;
+	let totalPrice = 0;
 	$(document).ready(function () {
 		$("#add-product").click(function () {
-			alert("Buton Çalıstı");
-			markup = `<div class="ss_cart_content">SolarPanel<span>$12 - $45</span></div>`;
+			var dataId = $(this).attr("data-id");
+			var dataName = $(this).attr("data-name");
+			var dataPrice = $(this).attr("data-price");
+			markup = `<div id="product"><a>
+						<div class="ss_cart_content" style="color: #5b769e;">
+						`+ dataName +`
+							<span style="color: #5b769e;">₺ `+ dataPrice +` </span>
+						</div>
+					</a><button id="delete" class="btn btn-danger"> x </button></div>`;
 			//markup = "<tr><td>This is row "
 			//	+ lineNo + "</td></tr>";
 			cart = $(".ss_cart_list");
 			cart.append(markup);
-			lineNo++;
+			// Ürün Ekleme
+			totalPrice += parseInt(dataPrice);
+			markUpTotal = `Total: <span>₺ `+ totalPrice +`</span>`
+			totalText = $(".ss_cart_total");
+			totalText.empty();
+			totalText.append(markUpTotal);
+			// 
 		});
 	});
 </script>
